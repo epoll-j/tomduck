@@ -5,6 +5,9 @@ import '../../../components/update_app/check_app_version.dart';
 import '../../../routes/route_name.dart';
 import '../../../config/app_env.dart' show appEnv;
 import 'provider/counterStore.p.dart';
+import 'components/server_card.dart';
+import 'components/flow_card.dart';
+import 'components/resource_card.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key, this.params}) : super(key: key);
@@ -32,7 +35,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('home页面'),
+        title: const Text('网络监控'),
         automaticallyImplyLeading: false,
       ),
       body: GestureDetector(
@@ -47,39 +50,46 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
 
   Widget contextWidget() {
     return ListView(
+      padding: const EdgeInsets.all(20),
       children: List.generate(1, (index) {
         return Column(
+
           children: <Widget>[
-            Text('App渠道：${appEnv.getAppChannel()}'),
-            _button(
-              '跳转test页',
-              onPressed: () {
-                Navigator.pushNamed(
-                  context,
-                  RouteName.testDemo,
-                  arguments: {'data': '别名路由传参666'},
-                );
-              },
-            ),
-            Text('状态管理值：${context.watch<CounterStore>().value}'),
-            _button(
-              '加+',
-              onPressed: () {
-                _counter.increment();
-              },
-            ),
-            _button(
-              '减-',
-              onPressed: () {
-                _counter.decrement();
-              },
-            ),
-            _button(
-              '强制更新App',
-              onPressed: () {
-                checkAppVersion(forceUpdate: true);
-              },
-            ),
+            ServerCard(),
+            const SizedBox(height: 40),
+            FlowCard(),
+            const SizedBox(height: 40),
+            ResourceCard(),
+            // Text('App渠道：${appEnv.getAppChannel()}'),
+            // _button(
+            //   '跳转test页',
+            //   onPressed: () {
+            //     Navigator.pushNamed(
+            //       context,
+            //       RouteName.testDemo,
+            //       arguments: {'data': '别名路由传参666'},
+            //     );
+            //   },
+            // ),
+            // Text('状态管理值：${context.watch<CounterStore>().value}'),
+            // _button(
+            //   '加+',
+            //   onPressed: () {
+            //     _counter.increment();
+            //   },
+            // ),
+            // _button(
+            //   '减-',
+            //   onPressed: () {
+            //     _counter.decrement();
+            //   },
+            // ),
+            // _button(
+            //   '强制更新App',
+            //   onPressed: () {
+            //     checkAppVersion(forceUpdate: true);
+            //   },
+            // ),
           ],
         );
       }),
