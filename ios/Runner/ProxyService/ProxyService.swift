@@ -10,6 +10,7 @@ import NIO
 import NIOHTTP1
 
 public let GROUP_NAME = "cn.tomduck.app"
+public let DEFAULT_PORT: NSNumber = 9527
 
 public class ProxyService: NSObject {
     
@@ -57,7 +58,7 @@ public class ProxyService: NSObject {
         compelete = callback
         task.startTime = NSNumber(value: Date().timeIntervalSince1970)
         DispatchQueue.global().async {
-            self.openWifiServer(host: self.task.wifiIP, port: Int(truncating: self.task.port)) { _ in
+            self.openWifiServer(host: NetworkUtils.LocalWifiIPv4(), port: Int(truncating: DEFAULT_PORT)) { _ in
                 self.runCompelete()
             }
         }

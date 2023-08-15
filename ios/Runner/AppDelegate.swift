@@ -9,9 +9,9 @@ import Flutter
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
       
-      ProxyService.create()?.run({ _ in
-          print("start")
-      })
+    ProxyService.create()?.run({ _ in
+        print("start")
+    })
       
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
