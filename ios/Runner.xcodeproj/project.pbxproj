@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		468196172A8798D500C88A04 /* ProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468196162A8798D500C88A04 /* ProxyService.swift */; };
+		468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED02A8BD5D60081D473 /* String+Extension.swift */; };
+		468F0ED42A8BD69B0081D473 /* HttpHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED32A8BD69B0081D473 /* HttpHandler.swift */; };
+		468F0ED62A8BD7140081D473 /* ExchangeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED52A8BD7140081D473 /* ExchangeHandler.swift */; };
+		468F0ED82A8BD73D0081D473 /* ChannelWatchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED72A8BD73D0081D473 /* ChannelWatchHandler.swift */; };
+		468F0EDB2A8BD7950081D473 /* ProxyContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDA2A8BD7950081D473 /* ProxyContext.swift */; };
+		468F0EDD2A8BD80B0081D473 /* ProxyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */; };
+		468F0EDF2A8BD8A10081D473 /* NetworkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */; };
+		468F0EE12A8BD94E0081D473 /* HttpMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EE02A8BD94E0081D473 /* HttpMatcher.swift */; };
+		46C48E5B2A887FC2001091A4 /* CaughtTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5A2A887FC2001091A4 /* CaughtTask.swift */; };
+		46C48E5E2A8882FC001091A4 /* ProtocolDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */; };
+		46C48E602A888365001091A4 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5F2A888365001091A4 /* Matcher.swift */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -35,6 +47,18 @@
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		16F1080A07411ECF155FFA09 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		468196162A8798D500C88A04 /* ProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyService.swift; sourceTree = "<group>"; };
+		468F0ED02A8BD5D60081D473 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		468F0ED32A8BD69B0081D473 /* HttpHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHandler.swift; sourceTree = "<group>"; };
+		468F0ED52A8BD7140081D473 /* ExchangeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeHandler.swift; sourceTree = "<group>"; };
+		468F0ED72A8BD73D0081D473 /* ChannelWatchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelWatchHandler.swift; sourceTree = "<group>"; };
+		468F0EDA2A8BD7950081D473 /* ProxyContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyContext.swift; sourceTree = "<group>"; };
+		468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyRequest.swift; sourceTree = "<group>"; };
+		468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInfo.swift; sourceTree = "<group>"; };
+		468F0EE02A8BD94E0081D473 /* HttpMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMatcher.swift; sourceTree = "<group>"; };
+		46C48E5A2A887FC2001091A4 /* CaughtTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtTask.swift; sourceTree = "<group>"; };
+		46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDetector.swift; sourceTree = "<group>"; };
+		46C48E5F2A888365001091A4 /* Matcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
 		4B6D3F37D2F5204A3678BFE6 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,8 +92,58 @@
 				16F1080A07411ECF155FFA09 /* Pods-Runner.release.xcconfig */,
 				1132AC1DE5D3FDD4FD5C1071 /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		468196152A8798B400C88A04 /* ProxyService */ = {
+			isa = PBXGroup;
+			children = (
+				468F0ED92A8BD7840081D473 /* Utils */,
+				468F0ED22A8BD6880081D473 /* Handler */,
+				468F0ECF2A8BD5990081D473 /* Extension */,
+				46C48E5C2A8882D2001091A4 /* Detector */,
+				468196162A8798D500C88A04 /* ProxyService.swift */,
+				46C48E5A2A887FC2001091A4 /* CaughtTask.swift */,
+			);
+			path = ProxyService;
+			sourceTree = "<group>";
+		};
+		468F0ECF2A8BD5990081D473 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				468F0ED02A8BD5D60081D473 /* String+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		468F0ED22A8BD6880081D473 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				468F0ED32A8BD69B0081D473 /* HttpHandler.swift */,
+				468F0ED52A8BD7140081D473 /* ExchangeHandler.swift */,
+				468F0ED72A8BD73D0081D473 /* ChannelWatchHandler.swift */,
+			);
+			path = Handler;
+			sourceTree = "<group>";
+		};
+		468F0ED92A8BD7840081D473 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				468F0EDA2A8BD7950081D473 /* ProxyContext.swift */,
+				468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */,
+				468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		46C48E5C2A8882D2001091A4 /* Detector */ = {
+			isa = PBXGroup;
+			children = (
+				46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */,
+				46C48E5F2A888365001091A4 /* Matcher.swift */,
+				468F0EE02A8BD94E0081D473 /* HttpMatcher.swift */,
+			);
+			path = Detector;
 			sourceTree = "<group>";
 		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
@@ -105,6 +179,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				468196152A8798B400C88A04 /* ProxyService */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -275,8 +350,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				468F0EDB2A8BD7950081D473 /* ProxyContext.swift in Sources */,
+				46C48E5B2A887FC2001091A4 /* CaughtTask.swift in Sources */,
+				468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */,
+				468F0ED42A8BD69B0081D473 /* HttpHandler.swift in Sources */,
+				468F0EDD2A8BD80B0081D473 /* ProxyRequest.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				468F0ED62A8BD7140081D473 /* ExchangeHandler.swift in Sources */,
+				468F0ED82A8BD73D0081D473 /* ChannelWatchHandler.swift in Sources */,
+				468F0EDF2A8BD8A10081D473 /* NetworkInfo.swift in Sources */,
+				46C48E5E2A8882FC001091A4 /* ProtocolDetector.swift in Sources */,
+				46C48E602A888365001091A4 /* Matcher.swift in Sources */,
+				468F0EE12A8BD94E0081D473 /* HttpMatcher.swift in Sources */,
+				468196172A8798D500C88A04 /* ProxyService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
