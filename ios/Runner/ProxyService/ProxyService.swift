@@ -58,7 +58,7 @@ public class ProxyService: NSObject {
         compelete = callback
         task.startTime = NSNumber(value: Date().timeIntervalSince1970)
         DispatchQueue.global().async {
-            self.openWifiServer(host: NetworkUtils.LocalWifiIPv4(), port: Int(truncating: DEFAULT_PORT)) { _ in
+            self.openWifiServer(host: NetworkInfo.LocalWifiIPv4(), port: Int(truncating: DEFAULT_PORT)) { _ in
                 self.runCompelete()
             }
         }
