@@ -20,25 +20,24 @@ class HttpMatcher: Matcher {
     
     override func match(buf: ByteBuffer) -> Int {
         if buf.readableBytes < 8 {
-            return ProtocolMatcher.PENDING
+            return Matcher.PENDING
         }
         
         guard let front8 = buf.getString(at: 0, length: 8) else {
-            return ProtocolMatcher.MISMATCH
+            return Matcher.MISMATCH
         }
         let strArray = front8.components(separatedBy: " ")
         if strArray.count <= 0 {
-            return ProtocolMatcher.MISMATCH
+            return Matcher.MISMATCH
         }
         if methods.contains(strArray.first!) {
-            return ProtocolMatcher.MATCH
+            return Matcher.MATCH
         }
-        return ProtocolMatcher.MISMATCH
+        return Matcher.MISMATCH
     }
     
     override func handlePipeline(pipleline: ChannelPipeline, task: CaughtTask) {
         let pc = ProxyContext(isHttp: true, task: task)
-        pc.session.schemes = "Http"
         _ = pipleline.configureHTTPServerPipeline()
         _ = pipleline.addHandler(HTTPHandler(proxyContext: pc), name: "HTTPHandle", position: .last)
     }
