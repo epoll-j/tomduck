@@ -16,10 +16,10 @@ class ProxyContext: NSObject {
     
     var _clientChannel: Channel?
     var clientChannel: Channel?{
-        set{
+        set {
             _clientChannel = newValue
             _clientChannel?.closeFuture.whenComplete({ (R) in
-                switch R{
+                switch R {
                 case .failure(let error):
                     print("******\(self.request?.host ?? "") clientChannel close error ! \(error.localizedDescription)")
                     break
@@ -29,14 +29,14 @@ class ProxyContext: NSObject {
                 }
             })
         }
-        get{
+        get {
             return _clientChannel
         }
     }
     
     var _serverChannel: Channel?
     var serverChannel: Channel?{
-        set{
+        set {
             _serverChannel = newValue
             _serverChannel?.closeFuture.whenComplete({ (R) in
                 switch R{
@@ -48,7 +48,7 @@ class ProxyContext: NSObject {
                 }
             })
         }
-        get{
+        get {
             return _serverChannel
         }
     }
