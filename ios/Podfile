@@ -30,10 +30,10 @@ flutter_ios_podfile_setup
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
-  pod 'SwiftNIO', '~> 2.40'
-  pod 'SwiftNIOTransportServices', '~> 1.12'
-  pod 'SwiftNIOHTTP1', '~> 2.40'
-  pod 'SwiftNIOSSL', '~> 2.19.0'
+#  pod 'SwiftNIO', '~> 2.40'
+#  pod 'SwiftNIOTransportServices', '~> 1.12'
+#  pod 'SwiftNIOHTTP1', '~> 2.40'
+#  pod 'SwiftNIOSSL', '~> 2.19.0'
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 

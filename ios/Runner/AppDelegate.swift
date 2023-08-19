@@ -11,6 +11,7 @@ import Flutter
       
     ProxyService.create()?.run({ _ in
         print("start")
+        print(NetworkInfo.LocalWifiIPv4())
     })
       
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)

@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		462A00092A910EC70054B80B /* NIO in Frameworks */ = {isa = PBXBuildFile; productRef = 462A00082A910EC70054B80B /* NIO */; };
+		462A000B2A910EC70054B80B /* NIOCore in Frameworks */ = {isa = PBXBuildFile; productRef = 462A000A2A910EC70054B80B /* NIOCore */; };
+		462A000D2A910EC70054B80B /* NIOHTTP1 in Frameworks */ = {isa = PBXBuildFile; productRef = 462A000C2A910EC70054B80B /* NIOHTTP1 */; };
+		462A000F2A910EC70054B80B /* NIOTLS in Frameworks */ = {isa = PBXBuildFile; productRef = 462A000E2A910EC70054B80B /* NIOTLS */; };
+		462A00122A91119D0054B80B /* NIOTransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = 462A00112A91119D0054B80B /* NIOTransportServices */; };
+		462A00152A9115240054B80B /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 462A00142A9115240054B80B /* NIOSSL */; };
 		468196172A8798D500C88A04 /* ProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468196162A8798D500C88A04 /* ProxyService.swift */; };
 		468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED02A8BD5D60081D473 /* String+Extension.swift */; };
 		468F0ED42A8BD69B0081D473 /* HttpHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED32A8BD69B0081D473 /* HttpHandler.swift */; };
@@ -78,7 +84,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				462A000F2A910EC70054B80B /* NIOTLS in Frameworks */,
+				462A000B2A910EC70054B80B /* NIOCore in Frameworks */,
 				E1904CB3616A9B189A9E669B /* Pods_Runner.framework in Frameworks */,
+				462A00152A9115240054B80B /* NIOSSL in Frameworks */,
+				462A00122A91119D0054B80B /* NIOTransportServices in Frameworks */,
+				462A00092A910EC70054B80B /* NIO in Frameworks */,
+				462A000D2A910EC70054B80B /* NIOHTTP1 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +233,14 @@
 			dependencies = (
 			);
 			name = Runner;
+			packageProductDependencies = (
+				462A00082A910EC70054B80B /* NIO */,
+				462A000A2A910EC70054B80B /* NIOCore */,
+				462A000C2A910EC70054B80B /* NIOHTTP1 */,
+				462A000E2A910EC70054B80B /* NIOTLS */,
+				462A00112A91119D0054B80B /* NIOTransportServices */,
+				462A00142A9115240054B80B /* NIOSSL */,
+			);
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +269,11 @@
 				Base,
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
+			packageReferences = (
+				462A00072A910EC70054B80B /* XCRemoteSwiftPackageReference "swift-nio" */,
+				462A00102A91119D0054B80B /* XCRemoteSwiftPackageReference "swift-nio-transport-services" */,
+				462A00132A9115240054B80B /* XCRemoteSwiftPackageReference "swift-nio-ssl" */,
+			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -634,6 +659,66 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		462A00072A910EC70054B80B /* XCRemoteSwiftPackageReference "swift-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		462A00102A91119D0054B80B /* XCRemoteSwiftPackageReference "swift-nio-transport-services" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-nio-transport-services.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		462A00132A9115240054B80B /* XCRemoteSwiftPackageReference "swift-nio-ssl" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/epoll-j/swift-nio-ssl.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		462A00082A910EC70054B80B /* NIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 462A00072A910EC70054B80B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIO;
+		};
+		462A000A2A910EC70054B80B /* NIOCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 462A00072A910EC70054B80B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOCore;
+		};
+		462A000C2A910EC70054B80B /* NIOHTTP1 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 462A00072A910EC70054B80B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOHTTP1;
+		};
+		462A000E2A910EC70054B80B /* NIOTLS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 462A00072A910EC70054B80B /* XCRemoteSwiftPackageReference "swift-nio" */;
+			productName = NIOTLS;
+		};
+		462A00112A91119D0054B80B /* NIOTransportServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 462A00102A91119D0054B80B /* XCRemoteSwiftPackageReference "swift-nio-transport-services" */;
+			productName = NIOTransportServices;
+		};
+		462A00142A9115240054B80B /* NIOSSL */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 462A00132A9115240054B80B /* XCRemoteSwiftPackageReference "swift-nio-ssl" */;
+			productName = NIOSSL;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 97C146E61CF9000F007C117D /* Project object */;
 }

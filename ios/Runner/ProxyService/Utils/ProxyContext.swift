@@ -7,12 +7,12 @@
 
 import UIKit
 import NIO
-import NIOSSL
+//import NIOSSL
 
 class ProxyContext: NSObject {
     
-    var cert: NIOSSLCertificate?
-    var pkey: NIOSSLPrivateKey?
+//    var cert: NIOSSLCertificate?
+//    var pkey: NIOSSLPrivateKey?
     
     var _clientChannel: Channel?
     var clientChannel: Channel?{
