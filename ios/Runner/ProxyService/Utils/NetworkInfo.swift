@@ -102,9 +102,10 @@ public class NetworkInfo {
     
     
     public static func LocalWifiIPv4() -> String {
-        guard let list = IPAddressList() else { return "" }
-        guard let i = list.firstIndex(where: { $0.device == Device.LocalWifi.rawValue && $0.version == .iPv4 }) else { return "" }
-        return list[i].IP
+        return "127.0.0.1"
+//        guard let list = IPAddressList() else { return "" }
+//        guard let i = list.firstIndex(where: { $0.device == Device.LocalWifi.rawValue}) else { return "" }
+//        return list[i].IP
     }
     
     public static func WanIPv4() -> String {

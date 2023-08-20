@@ -15,15 +15,21 @@
 		462A000F2A910EC70054B80B /* NIOTLS in Frameworks */ = {isa = PBXBuildFile; productRef = 462A000E2A910EC70054B80B /* NIOTLS */; };
 		462A00122A91119D0054B80B /* NIOTransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = 462A00112A91119D0054B80B /* NIOTransportServices */; };
 		462A00152A9115240054B80B /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 462A00142A9115240054B80B /* NIOSSL */; };
+		4637923D2A92193B002BC7E8 /* HTTPSMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637923C2A92193B002BC7E8 /* HTTPSMatcher.swift */; };
+		4637923F2A9219BB002BC7E8 /* HTTPSHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637923E2A9219BB002BC7E8 /* HTTPSHandler.swift */; };
+		463792412A921A92002BC7E8 /* TunnelProxyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792402A921A92002BC7E8 /* TunnelProxyHandler.swift */; };
+		463792432A921B37002BC7E8 /* SSLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792422A921B37002BC7E8 /* SSLHandler.swift */; };
+		463792452A921C83002BC7E8 /* Cert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792442A921C83002BC7E8 /* Cert.swift */; };
+		463792472A92421B002BC7E8 /* CertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792462A92421B002BC7E8 /* CertUtils.swift */; };
 		468196172A8798D500C88A04 /* ProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468196162A8798D500C88A04 /* ProxyService.swift */; };
 		468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED02A8BD5D60081D473 /* String+Extension.swift */; };
-		468F0ED42A8BD69B0081D473 /* HttpHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED32A8BD69B0081D473 /* HttpHandler.swift */; };
+		468F0ED42A8BD69B0081D473 /* HTTPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED32A8BD69B0081D473 /* HTTPHandler.swift */; };
 		468F0ED62A8BD7140081D473 /* ExchangeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED52A8BD7140081D473 /* ExchangeHandler.swift */; };
 		468F0ED82A8BD73D0081D473 /* ChannelWatchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED72A8BD73D0081D473 /* ChannelWatchHandler.swift */; };
 		468F0EDB2A8BD7950081D473 /* ProxyContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDA2A8BD7950081D473 /* ProxyContext.swift */; };
 		468F0EDD2A8BD80B0081D473 /* ProxyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */; };
 		468F0EDF2A8BD8A10081D473 /* NetworkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */; };
-		468F0EE12A8BD94E0081D473 /* HttpMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EE02A8BD94E0081D473 /* HttpMatcher.swift */; };
+		468F0EE12A8BD94E0081D473 /* HTTPMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EE02A8BD94E0081D473 /* HTTPMatcher.swift */; };
 		46C48E5B2A887FC2001091A4 /* CaughtTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5A2A887FC2001091A4 /* CaughtTask.swift */; };
 		46C48E5E2A8882FC001091A4 /* ProtocolDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */; };
 		46C48E602A888365001091A4 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5F2A888365001091A4 /* Matcher.swift */; };
@@ -53,15 +59,21 @@
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		16F1080A07411ECF155FFA09 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		4637923C2A92193B002BC7E8 /* HTTPSMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSMatcher.swift; sourceTree = "<group>"; };
+		4637923E2A9219BB002BC7E8 /* HTTPSHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHandler.swift; sourceTree = "<group>"; };
+		463792402A921A92002BC7E8 /* TunnelProxyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelProxyHandler.swift; sourceTree = "<group>"; };
+		463792422A921B37002BC7E8 /* SSLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLHandler.swift; sourceTree = "<group>"; };
+		463792442A921C83002BC7E8 /* Cert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cert.swift; sourceTree = "<group>"; };
+		463792462A92421B002BC7E8 /* CertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertUtils.swift; sourceTree = "<group>"; };
 		468196162A8798D500C88A04 /* ProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyService.swift; sourceTree = "<group>"; };
 		468F0ED02A8BD5D60081D473 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		468F0ED32A8BD69B0081D473 /* HttpHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHandler.swift; sourceTree = "<group>"; };
+		468F0ED32A8BD69B0081D473 /* HTTPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHandler.swift; sourceTree = "<group>"; };
 		468F0ED52A8BD7140081D473 /* ExchangeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeHandler.swift; sourceTree = "<group>"; };
 		468F0ED72A8BD73D0081D473 /* ChannelWatchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelWatchHandler.swift; sourceTree = "<group>"; };
 		468F0EDA2A8BD7950081D473 /* ProxyContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyContext.swift; sourceTree = "<group>"; };
 		468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyRequest.swift; sourceTree = "<group>"; };
 		468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInfo.swift; sourceTree = "<group>"; };
-		468F0EE02A8BD94E0081D473 /* HttpMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMatcher.swift; sourceTree = "<group>"; };
+		468F0EE02A8BD94E0081D473 /* HTTPMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMatcher.swift; sourceTree = "<group>"; };
 		46C48E5A2A887FC2001091A4 /* CaughtTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtTask.swift; sourceTree = "<group>"; };
 		46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDetector.swift; sourceTree = "<group>"; };
 		46C48E5F2A888365001091A4 /* Matcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
@@ -131,9 +143,12 @@
 		468F0ED22A8BD6880081D473 /* Handler */ = {
 			isa = PBXGroup;
 			children = (
-				468F0ED32A8BD69B0081D473 /* HttpHandler.swift */,
+				468F0ED32A8BD69B0081D473 /* HTTPHandler.swift */,
 				468F0ED52A8BD7140081D473 /* ExchangeHandler.swift */,
 				468F0ED72A8BD73D0081D473 /* ChannelWatchHandler.swift */,
+				4637923E2A9219BB002BC7E8 /* HTTPSHandler.swift */,
+				463792402A921A92002BC7E8 /* TunnelProxyHandler.swift */,
+				463792422A921B37002BC7E8 /* SSLHandler.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -144,6 +159,8 @@
 				468F0EDA2A8BD7950081D473 /* ProxyContext.swift */,
 				468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */,
 				468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */,
+				463792442A921C83002BC7E8 /* Cert.swift */,
+				463792462A92421B002BC7E8 /* CertUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -153,7 +170,8 @@
 			children = (
 				46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */,
 				46C48E5F2A888365001091A4 /* Matcher.swift */,
-				468F0EE02A8BD94E0081D473 /* HttpMatcher.swift */,
+				468F0EE02A8BD94E0081D473 /* HTTPMatcher.swift */,
+				4637923C2A92193B002BC7E8 /* HTTPSMatcher.swift */,
 			);
 			path = Detector;
 			sourceTree = "<group>";
@@ -376,9 +394,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				468F0EDB2A8BD7950081D473 /* ProxyContext.swift in Sources */,
+				463792472A92421B002BC7E8 /* CertUtils.swift in Sources */,
+				463792452A921C83002BC7E8 /* Cert.swift in Sources */,
+				4637923D2A92193B002BC7E8 /* HTTPSMatcher.swift in Sources */,
 				46C48E5B2A887FC2001091A4 /* CaughtTask.swift in Sources */,
 				468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */,
-				468F0ED42A8BD69B0081D473 /* HttpHandler.swift in Sources */,
+				468F0ED42A8BD69B0081D473 /* HTTPHandler.swift in Sources */,
 				468F0EDD2A8BD80B0081D473 /* ProxyRequest.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
@@ -387,8 +408,11 @@
 				468F0EDF2A8BD8A10081D473 /* NetworkInfo.swift in Sources */,
 				46C48E5E2A8882FC001091A4 /* ProtocolDetector.swift in Sources */,
 				46C48E602A888365001091A4 /* Matcher.swift in Sources */,
-				468F0EE12A8BD94E0081D473 /* HttpMatcher.swift in Sources */,
+				468F0EE12A8BD94E0081D473 /* HTTPMatcher.swift in Sources */,
+				4637923F2A9219BB002BC7E8 /* HTTPSHandler.swift in Sources */,
+				463792432A921B37002BC7E8 /* SSLHandler.swift in Sources */,
 				468196172A8798D500C88A04 /* ProxyService.swift in Sources */,
+				463792412A921A92002BC7E8 /* TunnelProxyHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

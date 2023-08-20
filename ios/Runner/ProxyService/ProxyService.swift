@@ -37,7 +37,7 @@ public class ProxyService: NSObject {
     public init(task: CaughtTask) {
         super.init()
         self.task = task
-        let protocolDetector = ProtocolDetector(task: task ,matchers: [])
+        let protocolDetector = ProtocolDetector(task: task ,matchers: [HTTPMatcher(), HTTPSMatcher()])
         
         wifiBootstrap = ServerBootstrap(group: master, childGroup: worker)
             .serverChannelOption(ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET), SO_REUSEADDR), value: 1)

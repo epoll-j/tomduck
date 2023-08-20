@@ -9,7 +9,7 @@ import UIKit
 import NIO
 import NIOHTTP1
 
-class HttpMatcher: Matcher {
+class HTTPMatcher: Matcher {
     
     private let methods:Set<String> = ["GET", "POST", "PUT", "HEAD", "OPTIONS", "PATCH", "DELETE","TRACE"]
     
