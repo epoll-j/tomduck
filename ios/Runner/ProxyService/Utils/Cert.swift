@@ -7,7 +7,7 @@
 
 import Foundation
 
-let cert = [UInt8]("""
+let certificate = [UInt8]("""
 -----BEGIN CERTIFICATE-----
 MIICmTCCAgICCQDyRuhp2+u6EDANBgkqhkiG9w0BAQsFADCBkDELMAkGA1UEBhMC
 Q04xEjAQBgNVBAgMCUd1YW5nRG9uZzESMBAGA1UEBwwJR3VhbmdaaG91MRAwDgYD
