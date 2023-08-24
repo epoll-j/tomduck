@@ -35,7 +35,7 @@ class TunnelProxyHandler: ChannelInboundHandler,RemovableChannelHandler {
         let buf = unwrapInboundIn(data)
         if isOut {
             _ = proxyContext.serverChannel?.writeAndFlush(wrapInboundOut(buf))
-        }else{
+        } else {
             // 连接服务器
             if cf == nil {
                 connectToServer()
