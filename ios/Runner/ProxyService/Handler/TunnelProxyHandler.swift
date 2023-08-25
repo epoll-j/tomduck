@@ -90,7 +90,7 @@ class TunnelProxyHandler: ChannelInboundHandler,RemovableChannelHandler {
                 _ = proxyContext.clientChannel!.writeAndFlush(data)
             }
             requestDatas.removeAll()
-        }else{
+        } else {
             guard let msg = data else {return}
             requestDatas.append(msg)
         }
