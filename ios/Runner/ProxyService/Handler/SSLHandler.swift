@@ -86,7 +86,7 @@ class SSLHandler: ChannelInboundHandler, RemovableChannelHandler {
 //                proxyContext.task.certPool.setValue(dynamicCert, forKey: host)
 //            }
 //            let tlsServerConfiguration = TLSConfiguration.forServer(certificateChain: [.certificate(dynamicCert! as! NIOSSLCertificate)], privateKey: .privateKey(rsaKey!))
-            let tlsServerConfiguration = TLSConfiguration.makeServerConfiguration(certificateChain: [.certificate(try! NIOSSLCertificate(bytes: cert, format: .pem))], privateKey: .privateKey(try! NIOSSLPrivateKey(bytes: privateKey, format: .pem)))
+            let tlsServerConfiguration = TLSConfiguration.makeServerConfiguration(certificateChain: [.certificate(try! NIOSSLCertificate(bytes: certificate, format: .pem))], privateKey: .privateKey(try! NIOSSLPrivateKey(bytes: privateKey, format: .pem)))
             let sslServerContext = try! NIOSSLContext(configuration: tlsServerConfiguration)
             let sslServerHandler = try! NIOSSLServerHandler(context: sslServerContext)
             // issue:握手信息发出后，服务器验证未通过，失败未关闭channel
