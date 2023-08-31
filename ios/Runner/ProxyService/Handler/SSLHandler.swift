@@ -43,58 +43,22 @@ class SSLHandler: ChannelInboundHandler, RemovableChannelHandler {
         if (firstData == 22 && secondData <= 3 && thirdData <= 3) {
             // is ClientHello
             proxyContext.isSSL = true
-            // TODO:考虑做成全局变量，防止每次都从文件读取
-            // load CA cert
-//            let certPath = Bundle.main.path(forResource: "CA/cacert", ofType: "pem") ?? ""
-//            guard let cert = try? NIOSSLCertificate(file: certPath, format: .pem) else{
-//                proxyContext.session.sstate = "failure"
-//                print("Load Certificate Error !")
-//                proxyContext.session.note = "error:Load Certificate Error !"
-//                _ = context.channel.close()
-//                return
-//            }
-//            // ca private key
-//            let caPriKeyPath = Bundle.main.path(forResource: "CA/cakey", ofType: "pem") ?? ""
-//            guard let caPriKey = try? NIOSSLPrivateKey(file: caPriKeyPath, format: .pem) else {
-//                proxyContext.session.sstate = "failure"
-//                print("Load CA Key Error !")
-//                proxyContext.session.note = "error:Load CA Key Error !"
-//                _ = context.channel.close()
-//                return
-//            }
-//            // rsa key
-//            let rsaPriKeyPath = Bundle.main.path(forResource: "CA/rsakey", ofType: "pem") ?? ""
-//            guard let rsaKey = try? NIOSSLPrivateKey(file: rsaPriKeyPath, format: .pem) else {
-//                proxyContext.session.sstate = "failure"
-//                print("Load RSA Key Error !")
-//                proxyContext.session.note = "error:Load RSA Key Error !"
-//                _ = context.channel.close()
-//                return
-//            }
-//            let cert = proxyContext.task.cacert
-//            let caPriKey = proxyContext.task.cakey
-//            let rsaKey = proxyContext.task.rsakey
-//            if cert == nil || caPriKey == nil || rsaKey == nil {
-//                AxLogger.log("证书为空！！！", level: .Error)
-//            }
             // 通过CA证书给域名动态签发证书
-//            let host = proxyContext.request!.host
-//            var dynamicCert = proxyContext.task.certPool[host]
-//            if dynamicCert == nil {
-//                dynamicCert = CertUtils.generateCert(host: host,rsaKey: rsaKey!, caKey: caPriKey!, caCert: cert!)
-////                proxyContext.task.certPool[host] = dynamicCert
-//                proxyContext.task.certPool.setValue(dynamicCert, forKey: host)
-//            }
-//            let tlsServerConfiguration = TLSConfiguration.forServer(certificateChain: [.certificate(dynamicCert! as! NIOSSLCertificate)], privateKey: .privateKey(rsaKey!))
-            let tlsServerConfiguration = TLSConfiguration.makeServerConfiguration(certificateChain: [.certificate(try! NIOSSLCertificate(bytes: certificate, format: .pem))], privateKey: .privateKey(try! NIOSSLPrivateKey(bytes: privateKey, format: .pem)))
+            let host = proxyContext.request!.host
+            var dynamicCert = CertUtils.certPool[host]
+            if dynamicCert == nil {
+                dynamicCert = CertUtils.generateSelfSignedCert(host: host)
+                CertUtils.certPool[host] = dynamicCert
+            }
+
+            let tlsServerConfiguration = TLSConfiguration.makeServerConfiguration(certificateChain: [.certificate(dynamicCert as! NIOSSLCertificate)], privateKey: .privateKey(try! NIOSSLPrivateKey(bytes: privateKey, format: .pem)))
             let sslServerContext = try! NIOSSLContext(configuration: tlsServerConfiguration)
             let sslServerHandler = try! NIOSSLServerHandler(context: sslServerContext)
             // issue:握手信息发出后，服务器验证未通过，失败未关闭channel
             // 添加ssl握手处理handler
             let cancelHandshakeTask = context.channel.eventLoop.scheduleTask(in:  TimeAmount.seconds(10)) {
                 print("error:can not get server hello from MITM \(self.proxyContext.request?.host ?? "")")
-//                self.proxyContext.session.note = "error:can not get server hello from MITM"
-//                self.proxyContext.session.sstate = "failure"
+
                 context.channel.close(mode: .all,promise: nil)
             }
             let aPNHandler = ApplicationProtocolNegotiationHandler(alpnCompleteHandler: { result -> EventLoopFuture<Void> in
@@ -115,7 +79,7 @@ class SSLHandler: ChannelInboundHandler, RemovableChannelHandler {
             context.fireChannelRead(self.wrapInboundOut(buf))
             _ = context.pipeline.removeHandler(name: "SSLHandler")
             return
-        }else{
+        } else {
             print("+++++++++++++++ not ssl handshake ")
         }
     }
