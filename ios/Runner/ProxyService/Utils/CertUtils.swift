@@ -10,87 +10,77 @@ import NIO
 import CNIOBoringSSL
 import NIOSSL
 
+let cert = [UInt8]("""
+-----BEGIN CERTIFICATE-----
+MIIDXTCCAkWgAwIBAgIUdW6SMghdpA59S4cIsKtHP69scJIwDQYJKoZIhvcNAQEL
+BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMzA4MjUxMDAxNTdaFw0yNDA4
+MjQxMDAxNTdaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEw
+HwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwggEiMA0GCSqGSIb3DQEB
+AQUAA4IBDwAwggEKAoIBAQDxlCID1xFYXeK7c4ElHj0UjujhnZEEym3vkjOVSRqy
+QQ9WMuUCadLp0qshNETFozO0swpB1emRp6e5vxB07DxYnTvig9EXX26Z9MP2dTEQ
+JeUL31BYsUnNWqGBtvBA1SYAweozKt6IHMIcX4/zjYVLbGoQKpS1kjVmMcTVIjYN
+dMEf88Ctgc1LhHIGv7qReWKAuhy+nqy9rCDdxdQlgoHcB4kC7D5ADTlumOTfuxCm
+42nZI3ZKPVmzncsSOWunZihpYiOK7Ep1BYW0mf8y3iH0LUKsOmopslF+y51BA0Xv
+fXOq9eeUwz4OC/xp4f0G4agF0Ia7VEpQkkMUkP5KuzMZAgMBAAGjRTBDMAwGA1Ud
+EwQFMAMBAf8wFAYDVR0RBA0wC4IJanVlamluLmNuMB0GA1UdDgQWBBQzjzll38ky
+Cq4MDL+jo96SN0VX1zANBgkqhkiG9w0BAQsFAAOCAQEA0VontWMd1iD7XUM6SnOg
+KkfCeCLW/2ajM49//9lBN8PS5Da40SR/tiWLbOO6+392dfOE5BbeYJarurVjpHNd
+M9N9r/6pLWDHg2lcowhXqHjwlkztUhd3b7tKrk71J04Qx+8rMADf9CvMjxC+k9yf
+J0uAbPwHaTZy/0czBlBufB2f0t8GY3E34DGdXi5i8KxLYT1Ls8gkimij7qP02iI4
+H7hsLpQhA328C0T2IdKt6UKvZmJBsfkHrGr6a6TgSEuVIuUu8/zUDjrF3NJUik3S
+VYoKS5/RCWrBCehZwmKXl0bEQqr1u4+cRcSJ2BXPfPWBjUDmX7zfmVIxpT/LHACG
+0g==
+-----END CERTIFICATE-----
+""".utf8)
+
+let privateKey = [UInt8]("""
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEA8ZQiA9cRWF3iu3OBJR49FI7o4Z2RBMpt75IzlUkaskEPVjLl
+AmnS6dKrITRExaMztLMKQdXpkaenub8QdOw8WJ074oPRF19umfTD9nUxECXlC99Q
+WLFJzVqhgbbwQNUmAMHqMyreiBzCHF+P842FS2xqECqUtZI1ZjHE1SI2DXTBH/PA
+rYHNS4RyBr+6kXligLocvp6svawg3cXUJYKB3AeJAuw+QA05bpjk37sQpuNp2SN2
+Sj1Zs53LEjlrp2YoaWIjiuxKdQWFtJn/Mt4h9C1CrDpqKbJRfsudQQNF731zqvXn
+lMM+Dgv8aeH9BuGoBdCGu1RKUJJDFJD+SrszGQIDAQABAoIBAB7wEp8dRupjM6s/
+8pUXV0kvuCFUtYLAje21coe20gVsEZO/dtalSM6LHUFmWTxaVz/YAgNGauAtcWx3
+TJs8ucm7cTTkHr34iciLsSD6ByuDPt8TXU3Ofp4e8joTfJdA9Nn5+41L+y3BSRar
+IltVj3GGU9r4KQ1LySzqSMPm2rdEMdkMMobh50bS9i/HwofgCZ2QinuECIfnELzZ
+ZCR7WK4imuUezir2jFRz3eFEhV4SuLIlEvAWkg6OJKZ6sP3IbNJzY18SrO9m2elg
+x1q3OZp9cnGuOM4hUgOTsEb3hiHv7/OVdvPPOqlWYGEn2Ky/2fVLVk/pVba5hcwz
+S7pOCkUCgYEA+UP2dGSEookOHJuyUe6Na8f+mJT8RGwQ6oe79+AZUskNiC6JmPIa
+1xUsFeSDFOOPuu6YoKY/oirKAne0zG1jRk/KNxgGz6W84pihSFXNVu7vgn0Owwhl
+Zva8Ghyu7pew1yVCNP7AuD//N7LMZjMNhkB2ZCycrIevmhRijBZ2LlsCgYEA+BsB
+H6ioy3NNpOnJxvVheLN7P3il+Yn0gF24kussFY9iSY3IgyZVeZdtxkD2sM1rkrTO
+NcbWww9svi79TW/0tkXgGIpCW1w1KuU7CHC0yluuZSnfmPdyy3QXUzwBOKTvigW8
+KSMqb1aiijo0L/0FL/rvNVbB7/RILx/uRd31BpsCgYBc4jNjOdWmz1V/2ZDAMRln
+sVWwu8upH2/KRRwJCOvGyn6NYXIKmSThQtVzrvwde5KigKhFLM4HetRdyQeJKbXV
+jIP4ta5MECFrep6W2soye8SqJjmq+WT30jdTr56L7+CIuyyJnOhpgAd1VN4PszR1
+821qdKlJLSKFUtVKCFCvgwKBgQCnEmg7TXP9LPQILXa3B95PTW2dXD1IQOHo3zO/
+m6XgDuH87gEsb8/3RUWiz3RPssTR0fdatz8/s09i8nmYf9+mLn+ths0QgJM9A4gx
+MtRLwFk7vmrXsyoWX2Klpi6cWlUD+MCwYwHcX9ashm1GM3geyzfyDy4hy7ogIbxu
+R/0MKQKBgEZA5/WmnfNNX3YxSZ394xRAfekAMcp/LmtsG5Nz6F7o0IRlz/AYQWmh
+vVCZbyqzTeJEv7QI4XDoV/Ry/uDi9Ep87z9uxHAV1ognq/hHkgDb9106hDuo5Nmv
+KPZGDY2Ju2YbcqCfUmh8sd+By7QfEF4m5t4UnW23HhpKeTe4FQ+s
+-----END RSA PRIVATE KEY-----
+""".utf8)
+
 public class CertUtils: NSObject {
-        
+    
+    private static let certificate: NIOSSLCertificate = try! NIOSSLCertificate(bytes: cert, format: .pem)
     public static var certPool = NSMutableDictionary()
     
-//    public static func generateCert(host: String, rsaKey: NIOSSLPrivateKey, caKey: NIOSSLPrivateKey, caCert: NIOSSLCertificate) -> NIOSSLCertificate {
-//            let caPriKey = caKey._ref.assumingMemoryBound(to: EVP_PKEY.self)
-//            let key:UnsafeMutablePointer<EVP_PKEY> = rsaKey._ref.assumingMemoryBound(to: EVP_PKEY.self)//generateRSAPrivateKey()
-//            /* Set the DN of the request. */
-//            let name = CNIOBoringSSL_X509_NAME_new()
-//            CNIOBoringSSL_X509_NAME_add_entry_by_txt(name, "C", MBSTRING_ASC, "SE", -1, -1, 0);
-//            CNIOBoringSSL_X509_NAME_add_entry_by_txt(name, "ST", MBSTRING_ASC, "", -1, -1, 0);
-//            CNIOBoringSSL_X509_NAME_add_entry_by_txt(name, "L", MBSTRING_ASC, "", -1, -1, 0);
-//            CNIOBoringSSL_X509_NAME_add_entry_by_txt(name, "O", MBSTRING_ASC, "Company", -1, -1, 0);
-//            CNIOBoringSSL_X509_NAME_add_entry_by_txt(name, "OU", MBSTRING_ASC, "", -1, -1, 0);
-//            CNIOBoringSSL_X509_NAME_add_entry_by_txt(name, "CN", MBSTRING_ASC, host, -1, -1, 0);
-//            /* Self-sign the request to prove that we posses the key. */
-//    //        CNIOBoringSSL_X509_REQ_sign(req, key, CNIOBoringSSL_EVP_sha256())
-//            /* Sign with the CA. */
-//            let crt = CNIOBoringSSL_X509_new() // nil?
-//            /* Set version to X509v3 */
-//            CNIOBoringSSL_X509_set_version(crt, 2)
-//            /* Generate random 20 byte serial. */
-//            let serial = Int(arc4random_uniform(UInt32.max))
-//    //        print("生成一次随机数-------")
-//            CNIOBoringSSL_ASN1_INTEGER_set(CNIOBoringSSL_X509_get_serialNumber(crt), serial)
-//    //        serial = 0
-//            /* Set issuer to CA's subject. */
-//            // TODO:1125:这句也会报错！fix
-//            CNIOBoringSSL_X509_set_issuer_name(crt, CNIOBoringSSL_X509_get_subject_name(caCert._ref.assumingMemoryBound(to: X509.self)))
-//            /* Set validity of certificate to 1 years. */
-//            let notBefore = CNIOBoringSSL_ASN1_TIME_new()!
-//            var now = time(nil)
-//            CNIOBoringSSL_ASN1_TIME_set(notBefore, now)
-//            let notAfter = CNIOBoringSSL_ASN1_TIME_new()!
-//            now += 86400 * 365
-//            CNIOBoringSSL_ASN1_TIME_set(notAfter, now)
-//            CNIOBoringSSL_X509_set_notBefore(crt, notBefore)
-//            CNIOBoringSSL_X509_set_notAfter(crt, notAfter)
-//            CNIOBoringSSL_ASN1_TIME_free(notBefore)
-//            CNIOBoringSSL_ASN1_TIME_free(notAfter)
-//            /* Get the request's subject and just use it (we don't bother checking it since we generated it ourself). Also take the request's public key. */
-//            CNIOBoringSSL_X509_set_subject_name(crt, name)
-//            CNIOBoringSSL_X509_set_pubkey(crt, key)
-//
-//            CNIOBoringSSL_X509_NAME_free(name)
-//
-//            // 满足iOS13要求. See https://support.apple.com/en-us/HT210176
-//            addExtension(x509: crt!, nid: NID_basic_constraints, value: "critical,CA:FALSE")
-//            addExtension(x509: crt!, nid: NID_ext_key_usage, value: "serverAuth,OCSPSigning")
-//            addExtension(x509: crt!, nid: NID_subject_key_identifier, value: "hash")
-//            addExtension(x509: crt!, nid: NID_subject_alt_name, value: "DNS:" + host)
-//
-//            /* Now perform the actual signing with the CA. */
-//            CNIOBoringSSL_X509_sign(crt, caPriKey, CNIOBoringSSL_EVP_sha256())
-//
-//            let copyCrt = CNIOBoringSSL_X509_dup(crt!)!
-//            let cert = NIOSSLCertificate.fromUnsafePointer(takingOwnership: copyCrt)
-//            CNIOBoringSSL_X509_free(crt!)
-//            return cert
-//        }
-    
-    public static func generateSelfSignedCert(host: String, keyBytes: [UInt8]) -> NIOSSLCertificate {
-        let pkey = getPrivateKeyPointer(bytes: keyBytes)
+    public static func generateSelfSignedCert(host: String) -> NIOSSLCertificate {
+        let pkey = getPrivateKeyPointer(bytes: privateKey)
         let x: OpaquePointer = CNIOBoringSSL_X509_new()!
         CNIOBoringSSL_X509_set_version(x, 2)
         let subject = CNIOBoringSSL_X509_NAME_new()
         CNIOBoringSSL_X509_NAME_add_entry_by_txt(subject, "C", MBSTRING_ASC, "SE", -1, -1, 0);
         CNIOBoringSSL_X509_NAME_add_entry_by_txt(subject, "ST", MBSTRING_ASC, "", -1, -1, 0);
         CNIOBoringSSL_X509_NAME_add_entry_by_txt(subject, "L", MBSTRING_ASC, "", -1, -1, 0);
-        CNIOBoringSSL_X509_NAME_add_entry_by_txt(subject, "O", MBSTRING_ASC, "Company", -1, -1, 0);
+        CNIOBoringSSL_X509_NAME_add_entry_by_txt(subject, "O", MBSTRING_ASC, "Tomduck", -1, -1, 0);
         CNIOBoringSSL_X509_NAME_add_entry_by_txt(subject, "OU", MBSTRING_ASC, "", -1, -1, 0);
         CNIOBoringSSL_X509_NAME_add_entry_by_txt(subject, "CN", MBSTRING_ASC, host, -1, -1, 0);
-//        CNIOBoringSSL_X509_NAME_add_entry_by_txt(x, "C", MBSTRING_ASC, "SE", -1, -1, 0);
-//        CNIOBoringSSL_X509_NAME_add_entry_by_txt(x, "ST", MBSTRING_ASC, "", -1, -1, 0);
-//        CNIOBoringSSL_X509_NAME_add_entry_by_txt(x, "L", MBSTRING_ASC, "", -1, -1, 0);
-//        CNIOBoringSSL_X509_NAME_add_entry_by_txt(x, "O", MBSTRING_ASC, "Company", -1, -1, 0);
-//        CNIOBoringSSL_X509_NAME_add_entry_by_txt(x, "OU", MBSTRING_ASC, "", -1, -1, 0);
-//        CNIOBoringSSL_X509_NAME_add_entry_by_txt(x, "CN", MBSTRING_ASC, host, -1, -1, 0);
-        
-        // NB: X509_set_serialNumber uses an internal copy of the ASN1_INTEGER, so this is
-        // safe, there will be no use-after-free.
+
         var serial = randomSerialNumber()
         CNIOBoringSSL_X509_set_serialNumber(x, &serial)
         
@@ -108,21 +98,7 @@ public class CertUtils: NSObject {
         
         CNIOBoringSSL_X509_set_pubkey(x, pkey)
         
-        var certificate = try! NIOSSLCertificate(bytes: certificate, format: .pem)
-//        let commonName = "Tomduck"
-//        commonName.withCString { (pointer: UnsafePointer<Int8>) -> Void in
-//            pointer.withMemoryRebound(to: UInt8.self, capacity: commonName.lengthOfBytes(using: .utf8)) { (pointer: UnsafePointer<UInt8>) -> Void in
-//                CNIOBoringSSL_X509_NAME_add_entry_by_NID(name,
-//                                                         NID_commonName,
-//                                                         MBSTRING_UTF8,
-//                                                         UnsafeMutablePointer(mutating: pointer),
-//                                                         CInt(commonName.lengthOfBytes(using: .utf8)),
-//                                                         -1,
-//                                                         0)
-//            }
-//        }
-        var subjectName = CNIOBoringSSL_X509_get_subject_name(certificate.ref)
-        CNIOBoringSSL_X509_set_issuer_name(x, subjectName)
+        CNIOBoringSSL_X509_set_issuer_name(x, CNIOBoringSSL_X509_get_subject_name(certificate.ref))
         CNIOBoringSSL_X509_set_subject_name(x, subject)
         CNIOBoringSSL_X509_NAME_free(subject)
         addExtension(x509: x, nid: NID_basic_constraints, value: "critical,CA:FALSE")

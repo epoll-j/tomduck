@@ -14,12 +14,10 @@
 		462A000D2A910EC70054B80B /* NIOHTTP1 in Frameworks */ = {isa = PBXBuildFile; productRef = 462A000C2A910EC70054B80B /* NIOHTTP1 */; };
 		462A000F2A910EC70054B80B /* NIOTLS in Frameworks */ = {isa = PBXBuildFile; productRef = 462A000E2A910EC70054B80B /* NIOTLS */; };
 		462A00122A91119D0054B80B /* NIOTransportServices in Frameworks */ = {isa = PBXBuildFile; productRef = 462A00112A91119D0054B80B /* NIOTransportServices */; };
-		462A00152A9115240054B80B /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 462A00142A9115240054B80B /* NIOSSL */; };
 		4637923D2A92193B002BC7E8 /* HTTPSMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637923C2A92193B002BC7E8 /* HTTPSMatcher.swift */; };
 		4637923F2A9219BB002BC7E8 /* HTTPSHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4637923E2A9219BB002BC7E8 /* HTTPSHandler.swift */; };
 		463792412A921A92002BC7E8 /* TunnelProxyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792402A921A92002BC7E8 /* TunnelProxyHandler.swift */; };
 		463792432A921B37002BC7E8 /* SSLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792422A921B37002BC7E8 /* SSLHandler.swift */; };
-		463792452A921C83002BC7E8 /* Cert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792442A921C83002BC7E8 /* Cert.swift */; };
 		463792472A92421B002BC7E8 /* CertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792462A92421B002BC7E8 /* CertUtils.swift */; };
 		468196172A8798D500C88A04 /* ProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468196162A8798D500C88A04 /* ProxyService.swift */; };
 		468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED02A8BD5D60081D473 /* String+Extension.swift */; };
@@ -33,6 +31,7 @@
 		46C48E5B2A887FC2001091A4 /* CaughtTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5A2A887FC2001091A4 /* CaughtTask.swift */; };
 		46C48E5E2A8882FC001091A4 /* ProtocolDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */; };
 		46C48E602A888365001091A4 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5F2A888365001091A4 /* Matcher.swift */; };
+		46D32EEA2A9B481000F8C434 /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 46D32EE92A9B481000F8C434 /* NIOSSL */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -63,7 +62,6 @@
 		4637923E2A9219BB002BC7E8 /* HTTPSHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHandler.swift; sourceTree = "<group>"; };
 		463792402A921A92002BC7E8 /* TunnelProxyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelProxyHandler.swift; sourceTree = "<group>"; };
 		463792422A921B37002BC7E8 /* SSLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLHandler.swift; sourceTree = "<group>"; };
-		463792442A921C83002BC7E8 /* Cert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cert.swift; sourceTree = "<group>"; };
 		463792462A92421B002BC7E8 /* CertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertUtils.swift; sourceTree = "<group>"; };
 		468196162A8798D500C88A04 /* ProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyService.swift; sourceTree = "<group>"; };
 		468F0ED02A8BD5D60081D473 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -77,6 +75,8 @@
 		46C48E5A2A887FC2001091A4 /* CaughtTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaughtTask.swift; sourceTree = "<group>"; };
 		46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDetector.swift; sourceTree = "<group>"; };
 		46C48E5F2A888365001091A4 /* Matcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
+		46D32EE62A9B47BA00F8C434 /* swift-nio-ssl */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-nio-ssl"; path = "../../swift-nio-ssl"; sourceTree = "<group>"; };
+		46D32EE72A9B47F100F8C434 /* swift-nio-ssl */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-nio-ssl"; path = "../../swift-nio-ssl"; sourceTree = "<group>"; };
 		4B6D3F37D2F5204A3678BFE6 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 				462A000F2A910EC70054B80B /* NIOTLS in Frameworks */,
 				462A000B2A910EC70054B80B /* NIOCore in Frameworks */,
 				E1904CB3616A9B189A9E669B /* Pods_Runner.framework in Frameworks */,
-				462A00152A9115240054B80B /* NIOSSL in Frameworks */,
+				46D32EEA2A9B481000F8C434 /* NIOSSL in Frameworks */,
 				462A00122A91119D0054B80B /* NIOTransportServices in Frameworks */,
 				462A00092A910EC70054B80B /* NIO in Frameworks */,
 				462A000D2A910EC70054B80B /* NIOHTTP1 in Frameworks */,
@@ -159,7 +159,6 @@
 				468F0EDA2A8BD7950081D473 /* ProxyContext.swift */,
 				468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */,
 				468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */,
-				463792442A921C83002BC7E8 /* Cert.swift */,
 				463792462A92421B002BC7E8 /* CertUtils.swift */,
 			);
 			path = Utils;
@@ -176,6 +175,15 @@
 			path = Detector;
 			sourceTree = "<group>";
 		};
+		46D32EE52A9B47BA00F8C434 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				46D32EE62A9B47BA00F8C434 /* swift-nio-ssl */,
+				46D32EE72A9B47F100F8C434 /* swift-nio-ssl */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +198,7 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				46D32EE52A9B47BA00F8C434 /* Packages */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
@@ -257,7 +266,7 @@
 				462A000C2A910EC70054B80B /* NIOHTTP1 */,
 				462A000E2A910EC70054B80B /* NIOTLS */,
 				462A00112A91119D0054B80B /* NIOTransportServices */,
-				462A00142A9115240054B80B /* NIOSSL */,
+				46D32EE92A9B481000F8C434 /* NIOSSL */,
 			);
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
@@ -290,7 +299,7 @@
 			packageReferences = (
 				462A00072A910EC70054B80B /* XCRemoteSwiftPackageReference "swift-nio" */,
 				462A00102A91119D0054B80B /* XCRemoteSwiftPackageReference "swift-nio-transport-services" */,
-				462A00132A9115240054B80B /* XCRemoteSwiftPackageReference "swift-nio-ssl" */,
+				46D32EE82A9B481000F8C434 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */,
 			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
@@ -395,7 +404,6 @@
 			files = (
 				468F0EDB2A8BD7950081D473 /* ProxyContext.swift in Sources */,
 				463792472A92421B002BC7E8 /* CertUtils.swift in Sources */,
-				463792452A921C83002BC7E8 /* Cert.swift in Sources */,
 				4637923D2A92193B002BC7E8 /* HTTPSMatcher.swift in Sources */,
 				46C48E5B2A887FC2001091A4 /* CaughtTask.swift in Sources */,
 				468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */,
@@ -701,7 +709,7 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		462A00132A9115240054B80B /* XCRemoteSwiftPackageReference "swift-nio-ssl" */ = {
+		46D32EE82A9B481000F8C434 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/epoll-j/swift-nio-ssl.git";
 			requirement = {
@@ -737,9 +745,9 @@
 			package = 462A00102A91119D0054B80B /* XCRemoteSwiftPackageReference "swift-nio-transport-services" */;
 			productName = NIOTransportServices;
 		};
-		462A00142A9115240054B80B /* NIOSSL */ = {
+		46D32EE92A9B481000F8C434 /* NIOSSL */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 462A00132A9115240054B80B /* XCRemoteSwiftPackageReference "swift-nio-ssl" */;
+			package = 46D32EE82A9B481000F8C434 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */;
 			productName = NIOSSL;
 		};
 /* End XCSwiftPackageProductDependency section */
