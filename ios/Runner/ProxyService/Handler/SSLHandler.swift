@@ -79,7 +79,7 @@ class SSLHandler: ChannelInboundHandler, RemovableChannelHandler {
             context.fireChannelRead(self.wrapInboundOut(buf))
             _ = context.pipeline.removeHandler(name: "SSLHandler")
             return
-        }else{
+        } else {
             print("+++++++++++++++ not ssl handshake ")
         }
     }

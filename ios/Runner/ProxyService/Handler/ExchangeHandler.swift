@@ -58,7 +58,12 @@ class ExchangeHandler: ChannelInboundHandler, RemovableChannelHandler {
     }
 
     func errorCaught(context: ChannelHandlerContext, error: Error) {
-
+        if let channelError = error as? ChannelPipelineError {
+            if channelError == .notFound && proxyContext.request!.ssl {
+                return
+            }
+        }
+        
         context.channel.close(mode: .all,promise: nil)
 
         if proxyContext.serverChannel!.isActive {
