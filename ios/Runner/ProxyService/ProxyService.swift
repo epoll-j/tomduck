@@ -29,7 +29,7 @@ public class ProxyService: NSObject {
     var wifiChannel: Channel!
     var wifiBindIP = ""
     var wifiBindPort = -1
-    var wifiStarted = ServiceState.initial
+    var wifiState = ServiceState.initial
     
     var compelete: ((Result<Int, Error>) -> Void)?
     var closed: (() -> Void)?
@@ -58,7 +58,7 @@ public class ProxyService: NSObject {
         compelete = callback
         task.startTime = NSNumber(value: Date().timeIntervalSince1970)
         DispatchQueue.global().async {
-            self.openWifiServer(host: NetworkInfo.LocalWifiIPv4(), port: Int(truncating: DEFAULT_PORT)) { _ in
+            self.openWifiServer(host: "0.0.0.0", port: Int(truncating: DEFAULT_PORT)) { _ in
                 self.runCompelete()
             }
         }
@@ -67,22 +67,60 @@ public class ProxyService: NSObject {
     public func openWifiServer(host: String, port: Int, _ callback: ((Result<Int, Error>) -> Void)?) {
         wifiChannel = try? wifiBootstrap.bind(host: host, port: port).wait()
         if wifiChannel == nil {
-            wifiStarted = .failure
+            wifiState = .failure
             return
         }
         
-        guard let localAddress = wifiChannel.localAddress else {
-            wifiStarted = .failure
+        guard (wifiChannel.localAddress) != nil else {
+            wifiState = .failure
             return
         }
         
-        wifiStarted = .running
+        wifiState = .running
         callback?(.success(1))
         try? wifiChannel.closeFuture.wait()
-        wifiStarted = .closed
+        wifiState = .closed
     }
     
     private func runCompelete() {
         self.compelete?(.success(1))
+    }
+    
+    public func close(_ completionHandler: (() -> Void)?) -> Void {
+        closed = completionHandler
+        task.stopTime = NSNumber(value: Date().timeIntervalSince1970)
+        
+        if let callback = completionHandler {
+            callback()
+        }
+        
+        closeWifiServer()
+        
+        master.shutdownGracefully { (error) in
+            if let e = error {
+                print("master thread of eventloop close error:\(e.localizedDescription)")
+            }
+        }
+        worker.shutdownGracefully { (error) in
+            if let e = error {
+                print("worker thread of eventloop close error:\(e.localizedDescription)")
+            }
+        }
+    }
+    
+    public func closeWifiServer(){
+        if wifiChannel == nil {
+            return
+        }
+        wifiChannel.close(mode: .input).whenComplete { (r) in
+            self.wifiState = .closed
+            switch r {
+            case .success:
+                self.wifiChannel = nil
+                break
+            case .failure(_):
+                break
+            }
+        }
     }
 }

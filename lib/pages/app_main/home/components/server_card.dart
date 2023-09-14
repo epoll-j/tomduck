@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bruno/bruno.dart';
+import 'package:flutter/services.dart';
+import 'package:tomduck/utils/channel_tools.dart';
 import 'home_item_card.dart';
 
 class ServerCard extends StatefulWidget {
@@ -27,7 +29,7 @@ class _ServerCardState extends State<ServerCard> {
             rowDistance: 10,
             children: [
               BrnInfoModal(keyPart: "代理服务:", valuePart: "192.168.1.1:8001"),
-              BrnInfoModal(keyPart: "代理服务:", valuePart: "192.168.1.1.8002")
+              BrnInfoModal(keyPart: "本地服务:", valuePart: "192.168.1.1.8002")
             ]));
   }
 
@@ -37,7 +39,11 @@ class _ServerCardState extends State<ServerCard> {
       icon: const Icon(Icons.favorite),
       iconSize: 40,
       color: Colors.red,
-      onPressed: () {},
+      onPressed: () async {
+        ChannelTools().invokeMethod("start_mimt").then((value) => {
+          print(value)
+        });
+      },
     ));
   }
 }
