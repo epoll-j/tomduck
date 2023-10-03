@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class CaughtTask {
+public class Task {
     public var localEnable: NSNumber = 1
     public var wifiEnable: NSNumber = 1
     

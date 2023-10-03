@@ -32,7 +32,7 @@ class HTTPSMatcher: Matcher {
         return Matcher.MISMATCH
     }
     
-    override func handlePipeline(pipleline: ChannelPipeline, task: CaughtTask) {
+    override func handlePipeline(pipleline: ChannelPipeline, task: Task) {
         let pc = ProxyContext(isHttp:true, task:task)
 //        pc.session.schemes = "Https"
         _ = pipleline.addHandler(HTTPResponseEncoder(), name: "HTTPResponseEncoder", position: .last)

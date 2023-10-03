@@ -21,7 +21,7 @@ public class ProxyService: NSObject {
         case failure
     }
     
-    var task: CaughtTask!
+    var task: Task!
     let master = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
     let worker = MultiThreadedEventLoopGroup(numberOfThreads: 3 * System.coreCount)
     
@@ -34,7 +34,7 @@ public class ProxyService: NSObject {
     var compelete: ((Result<Int, Error>) -> Void)?
     var closed: (() -> Void)?
     
-    public init(task: CaughtTask) {
+    public init(task: Task) {
         super.init()
         self.task = task
         let protocolDetector = ProtocolDetector(task: task ,matchers: [HTTPMatcher(), HTTPSMatcher()])
@@ -51,7 +51,7 @@ public class ProxyService: NSObject {
     }
     
     public static func create() -> ProxyService? {
-        return ProxyService(task: CaughtTask())
+        return ProxyService(task: Task())
     }
     
     public func run(_ callback: @escaping ((Result<Int, Error>) -> Void)) -> Void {

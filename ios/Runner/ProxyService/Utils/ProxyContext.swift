@@ -57,9 +57,9 @@ class ProxyContext: NSObject {
     var isHttp: Bool
     var isSSL: Bool = false
     
-    var task: CaughtTask
+    var task: Task
 
-    init(isHttp: Bool = false, task: CaughtTask) {
+    init(isHttp: Bool = false, task: Task) {
         self.isHttp = isHttp
         self.task = task
     }

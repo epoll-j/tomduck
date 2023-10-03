@@ -36,7 +36,7 @@ class HTTPMatcher: Matcher {
         return Matcher.MISMATCH
     }
     
-    override func handlePipeline(pipleline: ChannelPipeline, task: CaughtTask) {
+    override func handlePipeline(pipleline: ChannelPipeline, task: Task) {
         let pc = ProxyContext(isHttp: true, task: task)
         _ = pipleline.configureHTTPServerPipeline()
         _ = pipleline.addHandler(HTTPHandler(proxyContext: pc), name: "HTTPHandle", position: .last)

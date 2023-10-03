@@ -15,6 +15,6 @@ class Matcher {
     
     public func match(buf: ByteBuffer) -> Int {return -1}
     
-    public func handlePipeline(pipleline: ChannelPipeline, task: CaughtTask) -> Void {}
+    public func handlePipeline(pipleline: ChannelPipeline, task: Task) -> Void {}
     
 }
