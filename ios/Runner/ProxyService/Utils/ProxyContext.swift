@@ -15,7 +15,7 @@ class ProxyContext: NSObject {
 //    var pkey: NIOSSLPrivateKey?
     
     var _clientChannel: Channel?
-    var clientChannel: Channel?{
+    var clientChannel: Channel? {
         set {
             _clientChannel = newValue
             _clientChannel?.closeFuture.whenComplete({ (R) in
