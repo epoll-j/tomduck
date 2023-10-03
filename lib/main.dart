@@ -3,6 +3,7 @@ import 'package:tomduck/components/layouts/basic_layout.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:jh_debug/jh_debug.dart' show DebugMode, jhDebug, jhDebugMain;
+import 'package:tomduck/database/database.dart';
 import 'routes/generate_route.dart' show generateRoute;
 import 'routes/routes_data.dart'; // 路由配置
 import 'providers_config.dart' show providersConfig; // providers配置文件
@@ -21,6 +22,7 @@ void main() {
     debugMode: DebugMode.inConsole,
     errorCallback: (details) {},
   );
+  Database.initialize();
 }
 
 class MyApp extends StatelessWidget {
@@ -48,7 +50,8 @@ class MyApp extends StatelessWidget {
             ],
             theme: themeStore.getTheme,
             initialRoute: initialRoute,
-            onGenerateRoute: generateRoute, // 路由处理
+            onGenerateRoute: generateRoute,
+            // 路由处理
             // debugShowCheckedModeBanner: false,
             navigatorObservers: [...anaAllObs()],
           ),
