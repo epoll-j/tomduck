@@ -33,7 +33,7 @@
       "location" : "https://github.com/epoll-j/swift-nio-ssl.git",
       "state" : {
         "branch" : "main",
-        "revision" : "320bd978cceb8e88c125dcbb774943a92f6286e9"
+        "revision" : "f2d0dabf2bafc385848dc4a4cb60f3b34f07bfb0"
       }
     },
     {

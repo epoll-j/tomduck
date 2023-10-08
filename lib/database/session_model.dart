@@ -39,6 +39,7 @@ class SessionModel extends BaseModel {
         response_header TEXT,
         response_http_version TEXT,
         response_body TEXT,
+        response_msg TEXT,
         
         start_time INTEGER,
         connect_time INTEGER,
@@ -52,6 +53,9 @@ class SessionModel extends BaseModel {
         upload_flow INTEGER,
         download_flow INTEGER,
         
+        note TEXT,
+        state INTEGER,
+
         update_time INTEGER,
         create_time INTEGER
       )
