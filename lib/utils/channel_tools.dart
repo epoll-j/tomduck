@@ -1,11 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import 'dart:async';
 
+import 'package:tomduck/database/session_model.dart';
+
 class ChannelTools {
   final _methodChannel = const MethodChannel("iflow.epoll.dev/method_channel");
+  final _eventChannel = const EventChannel("iflow.epoll.dev/event_channel");
 
   ChannelTools._internal() {
     _methodChannel.setMethodCallHandler(_callHandler);
+    _eventChannel.receiveBroadcastStream("save_event").listen(_saveEventHandler);
   }
 
   factory ChannelTools() => _instance;
@@ -26,6 +32,21 @@ class ChannelTools {
     switch (methodCall.method) {
       case "openCaller":
         print("arrived to open caller");
+    }
+  }
+
+  _saveEventHandler(dynamic event) async {
+    var eventName = event['event'];
+    var data = jsonDecode(event['data']);
+    var id = data.remove('id');
+    if (eventName == 'save_session') {
+      var random = data.remove("random");
+      if (id == '' || id == null) {
+        var rowId = await SessionModel().insert(data);
+        _methodChannel.invokeMethod("setId_$random", rowId);
+      } else {
+        await SessionModel().update(Map.of({"id": id}), data);
+      }
     }
   }
 }
