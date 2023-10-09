@@ -66,7 +66,9 @@ public class Session {
     }
     
     @objc private func setId(_ notify: NSNotification) {
-        print(notify)
+        if let id = notify.object as? Int {
+            self.id = NSNumber(value: id)
+        }
     }
     
     public func save() {

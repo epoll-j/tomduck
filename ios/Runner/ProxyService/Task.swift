@@ -8,6 +8,7 @@
 import Foundation
 
 public class Task {
+    public var id: NSNumber!
     public var localEnable: NSNumber = 1
     public var wifiEnable: NSNumber = 1
     
@@ -16,4 +17,8 @@ public class Task {
     
     var wifiIP: String = "127.0.0.1"
     var port: NSNumber = 9527
+
+    init(id: NSNumber!) {
+        self.id = id
+    }
 }
