@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tomduck/database/session_model.dart';
 
+import '../database/task_model.dart';
+
 // Provider状态管理使用
 class ProxyStore with ChangeNotifier {
   int state = 0;
@@ -16,6 +18,7 @@ class ProxyStore with ChangeNotifier {
 
   void update() {
     time += 1;
+    TaskModel().update({ "id": taskId }, {});
     SessionModel().rawQuery("select count(id) as packageCount, sum(upload_flow) uploadFlow, sum(download_flow) downloadFlow from session where task_id = $taskId").then((val) {
       var result = val[0];
       packageCount = result['packageCount'];

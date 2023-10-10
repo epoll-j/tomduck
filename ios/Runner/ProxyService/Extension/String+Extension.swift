@@ -53,4 +53,8 @@ public extension String{
                    inet_pton(AF_INET6, ptr, &ipv6Addr) == 1
         }
     }
+
+    func toByteBuffer() -> ByteBuffer {
+        return ByteBuffer(string: self)
+    }
 }

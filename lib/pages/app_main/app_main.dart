@@ -15,6 +15,7 @@ import 'my_personal/my_personal.dart';
 import 'search/search.dart';
 import 'hot/hot.dart';
 import 'home/home.dart';
+import 'package:tomduck/pages/app_main/history/history.dart';
 
 /// [params] 别名路由传递的参数
 /// [params.pageId] 跳转到指定tab页面（0第一页），如果不是别名路由跳转的话，又想实现跳转到指定tab页面，推荐别名路由跳转方式。
@@ -66,16 +67,11 @@ class _AppMainState extends State<AppMain>
       'icon': Icons.home,
       'body': const Home(),
     },
-    // {
-    //   'title': '热门',
-    //   'icon': Icons.whatshot,
-    //   'body': const Hot(),
-    // },
-    // {
-    //   'title': '搜索',
-    //   'icon': Icons.search,
-    //   'body': Search(),
-    // },
+    {
+      'title': '记录',
+      'icon': Icons.history,
+      'body': History(),
+    },
     {
       'title': '我的',
       'icon': Icons.person,
