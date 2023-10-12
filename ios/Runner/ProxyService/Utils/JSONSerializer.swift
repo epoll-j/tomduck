@@ -148,7 +148,7 @@ public class JSONSerializer {
             else if let array = value as? [Int?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? String(value!) : ""
+                    handledValue += value != nil ? String(value!) : "\"\""
                     handledValue += (index < array.count-1 ? ", " : "")
                 }
                 handledValue += "]"
@@ -156,7 +156,7 @@ public class JSONSerializer {
             else if let array = value as? [Double?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? String(value!) : ""
+                    handledValue += value != nil ? String(value!) : "\"\""
                     handledValue += (index < array.count-1 ? ", " : "")
                 }
                 handledValue += "]"
@@ -164,7 +164,7 @@ public class JSONSerializer {
             else if let array = value as? [Float?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? String(value!) : ""
+                    handledValue += value != nil ? String(value!) : "\"\""
                     handledValue += (index < array.count-1 ? ", " : "")
                 }
                 handledValue += "]"
@@ -172,7 +172,7 @@ public class JSONSerializer {
             else if let array = value as? [Bool?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? String(value!) : ""
+                    handledValue += value != nil ? String(value!) : "\"\""
                     handledValue += (index < array.count-1 ? ", " : "")
                 }
                 handledValue += "]"
@@ -180,7 +180,7 @@ public class JSONSerializer {
             else if let array = value as? [String?] {
                 handledValue += "["
                 for (index, value) in array.enumerated() {
-                    handledValue += value != nil ? "\"\(value!)\"" : ""
+                    handledValue += value != nil ? "\"\(value!)\"" : "\"\""
                     handledValue += (index < array.count-1 ? ", " : "")
                 }
                 handledValue += "]"
@@ -223,11 +223,11 @@ public class JSONSerializer {
                     d = d.dropLast(1)
                     handledValue = String(d)
                 } else {
-                    handledValue = ""
+                    handledValue = "\"\""
                 }
             }
             else {
-                handledValue = String(describing: value) != "nil" ? "\"\(value)\"" : ""
+                handledValue = String(describing: value) != "nil" ? "\"\(value)\"" : "\"\""
             }
             
             if !skip {
@@ -269,4 +269,6 @@ public class JSONSerializer {
         
         return json
     }
+    
+    
 }
