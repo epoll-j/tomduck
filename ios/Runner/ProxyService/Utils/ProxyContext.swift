@@ -35,7 +35,7 @@ class ProxyContext: NSObject {
     }
     
     var _serverChannel: Channel?
-    var serverChannel: Channel?{
+    var serverChannel: Channel? {
         set {
             _serverChannel = newValue
             _serverChannel?.closeFuture.whenComplete({ (R) in
@@ -58,9 +58,11 @@ class ProxyContext: NSObject {
     var isSSL: Bool = false
     
     var task: Task
+    var session: Session
 
     init(isHttp: Bool = false, task: Task) {
         self.isHttp = isHttp
         self.task = task
+        self.session = Session.newSession(task)
     }
 }
