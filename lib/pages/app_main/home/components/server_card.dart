@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:bruno/bruno.dart';
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:tomduck/database/task_model.dart';
+import 'package:tomduck/provider/proxy.p.dart';
 import 'package:tomduck/utils/channel_tools.dart';
 import 'home_item_card.dart';
 
@@ -10,12 +14,16 @@ class ServerCard extends StatefulWidget {
 }
 
 class _ServerCardState extends State<ServerCard> {
+  late Timer _timer;
+  late ProxyStore _proxyStore;
+
   @override
   Widget build(BuildContext context) {
+   _proxyStore = Provider.of<ProxyStore>(context);
     return HomeItemCard(
       children: [
         const Text('基础信息', style: TextStyle(fontWeight: FontWeight.bold)),
-        Row(children: [serverBasic(), statusBtn(context)])
+        Row(children: [serverBasic(), statusBtn()])
       ],
     );
   }
@@ -33,17 +41,32 @@ class _ServerCardState extends State<ServerCard> {
             ]));
   }
 
-  Widget statusBtn(context) {
+  Widget statusBtn() {
+
     return Expanded(
         child: IconButton(
       icon: const Icon(Icons.favorite),
       iconSize: 40,
       color: Colors.red,
       onPressed: () async {
-        ChannelTools().invokeMethod("start_mimt").then((value) => {
-          print(value)
+        var taskId = await TaskModel().insert({});
+        _proxyStore.taskId = taskId;
+        _proxyStore.state = 1;
+        ChannelTools().invokeMethod("start_proxy", { "taskId": taskId }).then((value) => {
+          _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+            _proxyStore.update();
+          })
         });
       },
     ));
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    if (_timer != null) {
+      _timer.cancel();
+    }
   }
 }
