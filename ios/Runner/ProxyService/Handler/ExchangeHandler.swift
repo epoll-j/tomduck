@@ -24,13 +24,24 @@ class ExchangeHandler: ChannelInboundHandler, RemovableChannelHandler {
         let res = self.unwrapInboundIn(data)
         switch res {
         case .head(let head):
+            proxyContext.session.response_start_time = NSNumber(value: Date().timeIntervalSince1970) // 开始接收响应
+            proxyContext.session.response_http_version = "\(head.version)"
+            proxyContext.session.http_code = "\(head.status.code)"
+            proxyContext.session.response_msg = head.status.reasonPhrase
+            let contentType = head.headers["Content-Type"].first ?? ""
+            proxyContext.session.response_content_type = contentType
+            if let ss = contentType.components(separatedBy: ";").first {
+                proxyContext.session.suffix = ss.components(separatedBy: "/").last ?? ""
+            }
+            proxyContext.session.response_content_encoding = head.headers["Content-Encoding"].first ?? ""
+            proxyContext.session.response_header = Session.getHeadsJson(headers: head.headers)//
+            proxyContext.session.save()
             _ = proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.head(head))
         case .body(let body):
-            if body.readableBytes > 1024 * 1024 {
-                print("超大：\(body.readableBytes)")
-            }
             _ = proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.body(.byteBuffer(body)))
+            proxyContext.session.writeBody()
         case .end(let tailHeaders):
+            proxyContext.session.response_end_time = NSNumber(value: Date().timeIntervalSince1970) // 接收完毕响应
             gotEnd = true
             let promise = proxyContext.serverChannel?.eventLoop.makePromise(of: Void.self)
             proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.end(tailHeaders), promise: promise)
