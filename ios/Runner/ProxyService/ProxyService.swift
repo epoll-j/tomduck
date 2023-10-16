@@ -50,8 +50,8 @@ public class ProxyService: NSObject {
             .childChannelOption(ChannelOptions.connectTimeout, value: TimeAmount.seconds(10))
     }
     
-    public static func create() -> ProxyService? {
-        return ProxyService(task: Task())
+    public static func create(_ id: NSNumber) -> ProxyService? {
+        return ProxyService(task: Task(id: id))
     }
     
     public func run(_ callback: @escaping ((Result<Int, Error>) -> Void)) -> Void {
