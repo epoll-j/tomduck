@@ -1,4 +1,6 @@
+import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tomduck/database/session_model.dart';
 import 'package:tomduck/database/task_model.dart';
 
@@ -9,6 +11,7 @@ class History extends StatefulWidget {
 
 class _HotState extends State<History> {
   List historyData = [];
+  final dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
 
   @override
   void initState() {
@@ -26,43 +29,53 @@ class _HotState extends State<History> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('抓包记录'),
+        titleTextStyle: const TextStyle(color: Colors.black),
+        // elevation: 0,
         automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
       ),
+      backgroundColor: const Color.fromRGBO(244, 244, 244, 1),
       body: RefreshIndicator(
         onRefresh: () async {
           loadHistory();
         },
         child: ListView.separated(
-            itemCount: historyData.length,
-            itemBuilder: (context, index) => _buildItem(historyData[index]),
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(
-                  height: 1,
-                  thickness: 0.1,
-                  color: Colors.blueGrey,
-                )),
+          padding: const EdgeInsets.only(top: 20),
+          itemCount: historyData.length,
+          itemBuilder: (context, index) => _buildItem(historyData[index]),
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 10,);
+          },
+        ),
       ),
     );
   }
 
   Widget _buildItem(dynamic history) {
-    return ListTile(
-      title: Text('开始时间：${history['create_time']}'),
-      subtitle: Row(
-        children: [
-          Text('大小${history['download_flow'].toStringAsFixed(2)}kb'),
-          const SizedBox(
-            width: 10,
-          ),
-          Text(
-              '持续时间: ${getTime((history['update_time'] - history['create_time']) / 1000)}'),
-        ],
+    return FractionallySizedBox(
+      widthFactor: 0.95,
+      child: BrnShadowCard(
+          padding: const EdgeInsets.all(10),
+          child: Column(children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(dateFormat.format(DateTime.fromMillisecondsSinceEpoch(history['create_time'])), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                Text("持续时间：${getTime((history['update_time'] - history['create_time']) / 1000)}"),
+              ],
+            ),
+            SizedBox.fromSize(size: const Size.fromHeight(10),),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("${history['count']}次请求", style: const TextStyle(color: Colors.grey),),
+                Text("20分33秒", style: TextStyle(color: Colors.grey)),
+              ],
+            )
+          ])
       ),
-      contentPadding: const EdgeInsets.all(5),
-      trailing: Text('${history['count']}个数据包'),
     );
   }
-
   String getTime(double time) {
     return '${time ~/ 60}分${(time % 60).toInt()}秒';
   }

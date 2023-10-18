@@ -22,13 +22,15 @@ class ChannelWatchHandler: ChannelDuplexHandler, RemovableChannelHandler {
     
     func write(context: ChannelHandlerContext, data: NIOAny, promise: EventLoopPromise<Void>?) {
         let outData = unwrapInboundIn(data)
-        
+        let sum = self.proxyContext.session.upload_flow
+        self.proxyContext.session.upload_flow = NSNumber(value: (sum.intValue + outData.readableBytes))
         context.writeAndFlush(data, promise: promise)
     }
     
     func channelRead(context: ChannelHandlerContext, data: NIOAny) {
         let inData = unwrapInboundIn(data)
-        
+        let sum = self.proxyContext.session.download_flow
+        self.proxyContext.session.download_flow = NSNumber(value: (sum.intValue + inData.readableBytes))
         context.fireChannelRead(data)
     }
     

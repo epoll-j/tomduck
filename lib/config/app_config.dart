@@ -6,7 +6,10 @@ import '../routes/route_name.dart';
 class AppConfig {
   /// 设计稿尺寸 宽750 高1334
   static Size screenSize = const Size(750, 1334);
-
+  /// 背景色
+  static Color backgroundColor = const Color(0xFFF5F5F5);
+  /// 主色调
+  static Color mainColor = const Color(0xFF5E93F5);
   /// 是否开启dio接口详细信息输出，以及其它相关插件调试信息
   static const DEBUG = true;
 

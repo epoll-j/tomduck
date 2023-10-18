@@ -134,6 +134,7 @@ abstract class BaseModel {
 
   ///插入数据
   insert(Map<String, Object?> values) async {
+    values.addAll({'create_time': DateTime.now().millisecondsSinceEpoch});
     return database.insert(tableName, values);
   }
 
@@ -164,7 +165,7 @@ abstract class BaseModel {
         where.add("$key=${json1[key]}");
       }
     }
-
+    json2.addAll({'update_time': DateTime.now().millisecondsSinceEpoch});
     return database.update(
       tableName,
       json2,
