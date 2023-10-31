@@ -17,4 +17,6 @@ class RouteName {
 
   /// 注册页
   static String register = '/register';
+  /// 过滤器
+  static String filter = '/filter';
 }

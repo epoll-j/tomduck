@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:json_theme/json_theme.dart';
 import 'package:tomduck/components/layouts/basic_layout.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +16,14 @@ import 'config/common_config.dart' show commonConfig;
 import 'package:ana_page_loop/ana_page_loop.dart' show anaAllObs;
 import 'utils/app_setup/index.dart' show appSetupInit;
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final themeJson = jsonDecode(await rootBundle.loadString('asset/theme/main_theme.json'));
+
   jhDebugMain(
     appChild: MultiProvider(
       providers: providersConfig,
-      child: const MyApp(),
+      child: MyApp(theme: ThemeDecoder.decodeThemeData(themeJson)!,),
     ),
     debugMode: DebugMode.inConsole,
     errorCallback: (details) {},
@@ -26,12 +32,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final ThemeData theme;
+  const MyApp({Key? key, required this.theme}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     jhDebug.setGlobalKey = commonConfig.getGlobalKey;
     appSetupInit();
+
     return Consumer<ThemeStore>(
       builder: (context, themeStore, child) {
         return BasicLayout(
@@ -48,7 +56,7 @@ class MyApp extends StatelessWidget {
               Locale('zh', 'CH'),
               Locale('en', 'US'),
             ],
-            theme: themeStore.getTheme,
+            theme: theme,
             initialRoute: initialRoute,
             onGenerateRoute: generateRoute,
             // 路由处理

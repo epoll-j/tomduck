@@ -14,7 +14,7 @@ description: A http debugge tool.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.0 <3.10.0"
+  sdk: ">=3.1.5"
 
 dependencies:
   flutter:
@@ -29,7 +29,7 @@ dependencies:
   flutter_screenutil: 5.8.4
   jh_debug: ^1.0.2
   ana_page_loop: ^1.0.1
-  shared_preferences: 2.2.0 # 持久性存储
+  shared_preferences: ^2.2.2 # 持久性存储
   synchronized: 3.1.0
   ota_update: 5.1.0
   package_info_plus: 4.1.0 # app相关信息获取
@@ -38,7 +38,8 @@ dependencies:
   fluttertoast: 8.2.2
   bruno: 3.4.0
   sqflite: ^2.3.0
-  intl: ^0.18.0
+  intl: any
+  json_theme: ^6.3.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,7 @@ flutter:
   assets:
     - asset/images/updateVersion/header/
     - asset/images/logo.png
+    - asset/theme/main_theme.json
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

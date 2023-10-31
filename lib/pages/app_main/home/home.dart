@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tomduck/config/app_config.dart';
 import 'package:tomduck/pages/app_main/home/components/setting_card.dart';
-import '../../../components/update_app/check_app_version.dart';
-import '../../../config/app_env.dart' show appEnv;
 import 'provider/counterStore.p.dart';
-import 'components/server_card.dart';
 import 'components/flow_card.dart';
 import 'components/resource_card.dart';
 
@@ -91,7 +87,6 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
           return Column(
             children: <Widget>[
               SettingCard(),
-              // ServerCard(),
               const SizedBox(height: 20),
               FlowCard(),
               const SizedBox(height: 20),

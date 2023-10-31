@@ -39,7 +39,7 @@ class _FlowCardState extends State<FlowCard> {
     return BrnEnhanceNumberCard(
       rowCount: 3,
       itemTextAlign: TextAlign.left,
-      padding: const EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 15),
       itemChildren: [
         BrnNumberInfoItemModel(title: '抓包数量', number: _proxyStore.packageCount.toString(), lastDesc: '个'),
         BrnNumberInfoItemModel(title: '数据上传', number: _proxyStore.uploadFlow.toStringAsFixed(2), lastDesc: 'kb'),
