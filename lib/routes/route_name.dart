@@ -19,4 +19,8 @@ class RouteName {
   static String register = '/register';
   /// 过滤器
   static String filter = '/filter';
+  /// 篡改列表
+  static String falsify = '/falsify';
+  /// 篡改编辑
+  static String falsifyEdit = '/falsifyEdit';
 }

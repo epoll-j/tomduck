@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tomduck/pages/setting/falsify/falsify_edit.dart';
 import 'package:tomduck/pages/setting/filter/filter.dart';
 import 'route_name.dart';
 import '../pages/error_page/error_page.dart';
@@ -18,5 +19,7 @@ final Map<String,
   RouteName.error: (context, {params}) => ErrorPage(params: params),
   RouteName.testDemo: (context, {params}) => TestDemo(params: params),
   RouteName.login: (context, {params}) => Login(params: params),
-  RouteName.filter: (context, {params}) => Filter()
+  RouteName.filter: (context, {params}) => Filter(),
+  RouteName.falsify: (context, {params}) => FalsifyEdit(params: params),
+  RouteName.falsifyEdit: (context, {params}) => FalsifyEdit(params: params),
 };

@@ -154,21 +154,22 @@ abstract class BaseModel {
   }
 
   ///修改数据
-  update(Map<String, Object?> json1, Map<String, Object?> json2) async {
-    List<String> keys = json1.keys.toList();
+  update(Map<String, Object?> whereArg, Map<String, Object?> args) async {
+    List<String> keys = whereArg.keys.toList();
     List<String> where = [];
     for (int i = 0; i < keys.length; i++) {
       String key = keys[i];
-      if (json1[key].runtimeType == String) {
-        where.add("$key='${json1[key]}'");
+      if (whereArg[key].runtimeType == String) {
+        where.add("$key='${whereArg[key]}'");
       } else {
-        where.add("$key=${json1[key]}");
+        where.add("$key=${whereArg[key]}");
       }
     }
-    json2.addAll({'update_time': DateTime.now().millisecondsSinceEpoch});
+    args.remove("id");
+    args.addAll({'update_time': DateTime.now().millisecondsSinceEpoch});
     return database.update(
       tableName,
-      json2,
+      args,
       where: where.isEmpty ? null : where.join(" and "),
     );
   }
