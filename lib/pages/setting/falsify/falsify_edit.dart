@@ -7,7 +7,7 @@ import 'package:tomduck/database/falsify_model.dart';
 class FalsifyEdit extends StatefulWidget {
   FalsifyEdit({super.key, this.params}) {
     params ??= {
-      'enable': false,
+      'enable': 0,
       'action': 0,
       'group_id': 0,
       'title': '',
@@ -35,11 +35,11 @@ class _FalsifyEditState extends State<FalsifyEdit> {
             BrnBaseTitle(
               title: "是否启用",
               customActionWidget: Switch(
-                value: widget.params['enable'],
+                value: widget.params['enable'] == 0 ? false : true,
                 activeColor: AppConfig.mainColor,
                 onChanged: (bool value) {
                   setState(() {
-                    widget.params['enable'] = value;
+                    widget.params['enable'] = value ? 1 : 0;
                   });
                 },
               ),
@@ -51,6 +51,7 @@ class _FalsifyEditState extends State<FalsifyEdit> {
             ),
             BrnTextInputFormItem(
               title: '域名',
+              isRequire: true,
               subTitle: '请求域名，如：baidu.com，不需要填写http',
               controller: TextEditingController(text: widget.params['domain']),
               onChanged: (val) => {widget.params['domain'] = val},
@@ -116,14 +117,14 @@ class _FalsifyEditState extends State<FalsifyEdit> {
 
   onSave() async {
     if (widget.params['id'] != null) {
-      await FalsifyModel().update({'id': widget.params['id']}, Map<String, Object?>.from(widget.params));
+      await FalsifyModel().update({'id': widget.params['id']},
+          Map<String, Object?>.from(widget.params));
     } else {
       var id =
           await FalsifyModel().insert(Map<String, Object?>.from(widget.params));
       widget.params['id'] = id;
     }
     if (context.mounted) {
-      print(widget.params['id']);
       BrnToast.show(
         '保存成功',
         context,

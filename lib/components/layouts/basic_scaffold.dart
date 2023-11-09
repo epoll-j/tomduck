@@ -6,8 +6,10 @@ import '../../config/app_config.dart';
 class BasicScaffold extends StatelessWidget {
   final String title;
   final Widget child;
+  final FloatingActionButton? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
 
-  const BasicScaffold({super.key, required this.title, required this.child});
+  const BasicScaffold({super.key, required this.title, this.floatingActionButton, this.floatingActionButtonLocation, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,8 @@ class BasicScaffold extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       backgroundColor: AppConfig.backgroundColor,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
       body: Container(
         padding: EdgeInsets.all(15.w),
         child: child,
