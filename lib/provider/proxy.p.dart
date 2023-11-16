@@ -16,6 +16,15 @@ class ProxyStore with ChangeNotifier {
 
   int time = 0;
 
+  void updateState(int state) {
+    this.state = state;
+    time = 0;
+    packageCount = 0;
+    uploadFlow = 0;
+    downloadFlow = 0;
+    notifyListeners();
+  }
+
   void update() {
     time += 1;
     TaskModel().update({ "id": taskId }, {});

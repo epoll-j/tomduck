@@ -1,5 +1,7 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:tomduck/components/layouts/basic_scaffold.dart';
 
 import '../../../config/app_config.dart';
@@ -20,7 +22,7 @@ class _FalsifyState extends State<Falsify> {
   @override
   void initState() {
     super.initState();
-    loadHistory();
+    loadData();
   }
 
   @override
@@ -36,41 +38,50 @@ class _FalsifyState extends State<Falsify> {
           backgroundColor: AppConfig.mainColor,
           child: const Icon(Icons.add),
           onPressed: () {
-            Navigator.pushNamed(context, '/falsifyEdit');
+            Navigator.pushNamed(context, '/falsifyEdit')
+                .then((value) => {loadData()});
           },
         ),
-        child: RefreshIndicator(
-          onRefresh: () async {
-            loadHistory();
-          },
-          child: ListView.separated(
-            padding: const EdgeInsets.only(top: 20),
-            itemCount: _falsifyData.length,
-            itemBuilder: (context, index) =>
-                _buildItem(_falsifyData[index], index),
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                height: 10,
-              );
-            },
-          ),
-        ));
+        child: _falsifyData.isEmpty
+            ? BrnAbnormalStateWidget(
+                img: Image.asset('asset/images/no_data.png'),
+                title: '暂无数据',
+              )
+            : RefreshIndicator(
+                onRefresh: () async {
+                  loadData();
+                },
+                child: ListView.separated(
+                  padding: const EdgeInsets.only(top: 20),
+                  itemCount: _falsifyData.length,
+                  itemBuilder: (context, index) =>
+                      _buildItem(_falsifyData[index], index),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const SizedBox(
+                      height: 10,
+                    );
+                  },
+                ),
+              ));
   }
 
   Widget _buildItem(dynamic falsify, int index) {
-    return Dismissible(
+    return SwipeActionCell(
         key: Key('${falsify['id']}'),
-        direction: DismissDirection.endToStart,
-        onDismissed: (direction) {
-          FalsifyModel().remove({'id': falsify['id']});
-          setState(() {
-            _falsifyData.removeAt(index);
-          });
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('移除 ${falsify['domain']}'),
-            backgroundColor: Colors.redAccent,
-          ));
-        },
+        backgroundColor: AppConfig.backgroundColor,
+        trailingActions: <SwipeAction>[
+          SwipeAction(
+            performsFirstActionWithFullSwipe: true,
+            title: "删除",
+            onTap: (CompletionHandler handler) async {
+                await handler(true);
+                FalsifyModel().remove({'id': falsify['id']});
+                setState(() {
+                  _falsifyData.removeAt(index);
+                });
+            },
+            color: Colors.red),
+        ],
         child: FractionallySizedBox(
           widthFactor: 0.95,
           child: GestureDetector(
@@ -86,32 +97,45 @@ class _FalsifyState extends State<Falsify> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            falsify['domain'],
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                          Container(
+                            constraints: BoxConstraints(maxWidth: 500.w),
+                            child: Text(
+                              falsify['uri'],
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          Text(falsify['title'] == '' ? '-' : falsify['title']),
+                          Container(
+                            constraints: BoxConstraints(maxWidth: 500.w),
+                            child: Text(falsify['title'] == ''
+                                ? '-'
+                                : falsify['title']),
+                          ),
                         ],
                       ),
-                      Switch(
-                        value: falsify['enable'] == 0 ? false : true,
-                        activeColor: AppConfig.mainColor,
-                        onChanged: (bool value) {
-                          var val = value ? 1 : 0;
-                          FalsifyModel()
-                              .update({'id': falsify['id']}, {'enable': val});
-                          setState(() {
-                            falsify['enable'] = val;
-                          });
-                        },
+                      IgnorePointer(
+                        ignoring: false,
+                        child: Switch(
+                          value: falsify['enable'] == 0 ? false : true,
+                          activeColor: AppConfig.mainColor,
+                          onChanged: (bool value) {
+                            var val = value ? 1 : 0;
+                            FalsifyModel()
+                                .update({'id': falsify['id']}, {'enable': val});
+                            setState(() {
+                              falsify['enable'] = val;
+                            });
+                          },
+                        ),
                       )
                     ])),
           ),
         ));
   }
 
-  void loadHistory() async {
+  void loadData() async {
     var result = [];
     var dbList = await FalsifyModel()
         .rawQuery("select * from falsify order by create_time desc");
@@ -122,9 +146,9 @@ class _FalsifyState extends State<Falsify> {
         'action': item['action'],
         'group_id': item['group_id'],
         'title': item['title'],
-        'domain': item['domain'],
-        'path': item['path'],
-        'redirect': item['redirect'],
+        'uri': item['uri'],
+        'redirect_host': item['redirect_host'],
+        'redirect_port': item['redirect_port'],
         'req_body': item['req_body'],
         'req_param': item['req_param'],
         'resp_body': item['resp_body']

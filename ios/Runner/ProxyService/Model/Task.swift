@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class Task {
     public var id: NSNumber!
     public var localEnable: NSNumber = 1
     public var wifiEnable: NSNumber = 1
+    
+    public var rule: TaskRule!
     
     var startTime: NSNumber = 1
     var stopTime: NSNumber = 1
@@ -18,7 +21,10 @@ public class Task {
     var wifiIP: String = "127.0.0.1"
     var port: NSNumber = 9527
 
-    init(id: NSNumber!) {
-        self.id = id
+    init(arg: NSDictionary) {
+        let json = JSON(arg)
+        self.id = json["taskId"].numberValue
+        self.rule = TaskRule(filter: json["filter"], falsify: json["falsify"].array)
     }
 }
+

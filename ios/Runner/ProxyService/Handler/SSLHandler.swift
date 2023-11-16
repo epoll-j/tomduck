@@ -44,16 +44,17 @@ class SSLHandler: ChannelInboundHandler, RemovableChannelHandler {
             // is ClientHello
             proxyContext.isSSL = true
             // 通过CA证书给域名动态签发证书
-            let host = proxyContext.request!.host
-            var dynamicCert = CertUtils.certPool[host]
+//            let host = proxyContext.request!.host
+            let redirect = proxyContext.task.rule.redirect(ignore: proxyContext.session.ignore, request: proxyContext.request!)
+            var dynamicCert = CertUtils.certPool[redirect.0]
             if dynamicCert == nil {
-                dynamicCert = CertUtils.generateSelfSignedCert(host: host)
-                CertUtils.certPool[host] = dynamicCert
+                dynamicCert = CertUtils.generateSelfSignedCert(host: redirect.0)
+                CertUtils.certPool[redirect.0] = dynamicCert
             }
 
             let tlsServerConfiguration = TLSConfiguration.makeServerConfiguration(certificateChain: [.certificate(dynamicCert as! NIOSSLCertificate)], privateKey: .privateKey(try! NIOSSLPrivateKey(bytes: privateKey, format: .pem)))
             let sslServerContext = try! NIOSSLContext(configuration: tlsServerConfiguration)
-            let sslServerHandler = try! NIOSSLServerHandler(context: sslServerContext)
+            let sslServerHandler = NIOSSLServerHandler(context: sslServerContext)
             // issue:握手信息发出后，服务器验证未通过，失败未关闭channel
             // 添加ssl握手处理handler
             let cancelHandshakeTask = context.channel.eventLoop.scheduleTask(in:  TimeAmount.seconds(10)) {
@@ -63,7 +64,6 @@ class SSLHandler: ChannelInboundHandler, RemovableChannelHandler {
             }
             let aPNHandler = ApplicationProtocolNegotiationHandler(alpnCompleteHandler: { result -> EventLoopFuture<Void> in
                 cancelHandshakeTask.cancel()
-//                print("ServerHello MITM c->m:\(result) \(self.proxyContext.request?.host ?? "")")
                 let requestDecoder = HTTPRequestDecoder(leftOverBytesStrategy: .dropBytes)
                 return context.pipeline.addHandler(ByteToMessageHandler(requestDecoder), name: "ByteToMessageHandler").flatMap({
                     context.pipeline.addHandler(HTTPResponseEncoder(), name: "HTTPResponseEncoder").flatMap({                   // <--

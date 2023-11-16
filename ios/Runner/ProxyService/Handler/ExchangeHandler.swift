@@ -14,6 +14,7 @@ class ExchangeHandler: ChannelInboundHandler, RemovableChannelHandler {
     typealias InboundIn = HTTPClientResponsePart
     typealias OutboundOut = HTTPServerResponsePart
     
+    var isSendBody = false
     var proxyContext: ProxyContext
     var gotEnd: Bool = false
     init(proxyContext: ProxyContext) {
@@ -38,7 +39,17 @@ class ExchangeHandler: ChannelInboundHandler, RemovableChannelHandler {
             proxyContext.session.save()
             _ = proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.head(head))
         case .body(let body):
-            _ = proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.body(.byteBuffer(body)))
+            let respBody = proxyContext.task.rule.getFalsify(ignore: proxyContext.session.ignore, request: proxyContext.request!, type: 0, key: "resp_body")
+            if respBody != nil {
+                if (!isSendBody) {
+                    isSendBody = true
+                    for buff in respBody!.stringValue.toByteBuffer() {
+                        _ = proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.body(.byteBuffer(buff)))
+                    }
+                }
+            } else {
+                _ = proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.body(.byteBuffer(body)))
+            }
             proxyContext.session.writeBody()
         case .end(let tailHeaders):
             proxyContext.session.response_end_time = NSNumber(value: Date().timeIntervalSince1970) // 接收完毕响应

@@ -40,12 +40,15 @@ class ChannelTools {
     var data = jsonDecode(event['data']);
     var id = data.remove('id');
     if (eventName == 'save_session') {
-      var random = data.remove("random");
-      if (id == '' || id == null) {
-        var rowId = await SessionModel().insert(data);
-        _methodChannel.invokeMethod("setId_$random", rowId);
-      } else {
-        await SessionModel().update(Map.of({"id": id}), data);
+      var random = data.remove('random');
+      var ignore = data.remove('ignore');
+      if (!ignore) {
+        if (id == '' || id == null) {
+          var rowId = await SessionModel().insert(data);
+          _methodChannel.invokeMethod("setId_$random", rowId);
+        } else {
+          await SessionModel().update(Map.of({"id": id}), data);
+        }
       }
     }
   }

@@ -11,9 +11,9 @@ class FalsifyEdit extends StatefulWidget {
       'action': 0,
       'group_id': 0,
       'title': '',
-      'domain': '',
-      'path': '',
-      'redirect': '',
+      'uri': '',
+      'redirect_host': '',
+      'redirect_port': 80,
       'req_body': '',
       'req_param': '',
       'resp_body': ''
@@ -50,17 +50,11 @@ class _FalsifyEditState extends State<FalsifyEdit> {
               onChanged: (val) => {widget.params['title'] = val},
             ),
             BrnTextInputFormItem(
-              title: '域名',
+              title: '资源路径',
               isRequire: true,
-              subTitle: '请求域名，如：baidu.com，不需要填写http',
-              controller: TextEditingController(text: widget.params['domain']),
-              onChanged: (val) => {widget.params['domain'] = val},
-            ),
-            BrnTextInputFormItem(
-              title: 'Path',
-              subTitle: '请求路径，如：/api/v1/*',
-              controller: TextEditingController(text: widget.params['path']),
-              onChanged: (val) => {widget.params['path'] = val},
+              subTitle: '请求资源路径，如baidu.com/search，可用*通配符',
+              controller: TextEditingController(text: widget.params['uri']),
+              onChanged: (val) => {widget.params['uri'] = val},
             ),
             BrnRadioInputFormItem(
               title: '篡改行为',
@@ -73,11 +67,20 @@ class _FalsifyEditState extends State<FalsifyEdit> {
             Visibility(
                 visible: widget.params['action'] == 1,
                 child: BrnTextInputFormItem(
-                  title: '重定向到',
-                  subTitle: '重定向到对应地址，如：http://google.com/page',
-                  controller:
-                      TextEditingController(text: widget.params['redirect']),
-                  onChanged: (val) => {widget.params['redirect'] = val},
+                  title: '重定向域名',
+                  subTitle: '重定向到对应域名，如：google.com',
+                  controller: TextEditingController(
+                      text: widget.params['redirect_host']),
+                  onChanged: (val) => {widget.params['redirect_host'] = val},
+                )),
+            Visibility(
+                visible: widget.params['action'] == 1,
+                child: BrnTextInputFormItem(
+                  title: '重定向端口',
+                  subTitle: '重定向到指定端口，http默认80，https默认443',
+                  controller: TextEditingController(
+                      text: widget.params['redirect_port'].toString()),
+                  onChanged: (val) => {widget.params['redirect_port'] = int.tryParse(val) ?? 80},
                 )),
             Visibility(
                 visible: widget.params['action'] == 0,
@@ -89,8 +92,9 @@ class _FalsifyEditState extends State<FalsifyEdit> {
                 )),
             Visibility(
                 visible: widget.params['action'] == 0,
-                child: BrnTextInputFormItem(
+                child: BrnTextBlockInputFormItem(
                   title: '请求体替换',
+                  subTitle: '如：{"id": 0, "title": "666"}',
                   controller:
                       TextEditingController(text: widget.params['req_body']),
                   onChanged: (val) => {widget.params['req_body'] = val},
@@ -130,6 +134,7 @@ class _FalsifyEditState extends State<FalsifyEdit> {
         context,
         duration: BrnDuration.short,
       );
+      Navigator.pop(context);
     }
   }
 }

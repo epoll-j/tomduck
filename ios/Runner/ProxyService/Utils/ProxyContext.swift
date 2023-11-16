@@ -7,12 +7,9 @@
 
 import UIKit
 import NIO
-//import NIOSSL
+import NIOHTTP1
 
 class ProxyContext: NSObject {
-    
-//    var cert: NIOSSLCertificate?
-//    var pkey: NIOSSLPrivateKey?
     
     var _clientChannel: Channel?
     var clientChannel: Channel? {
@@ -64,5 +61,30 @@ class ProxyContext: NSObject {
         self.isHttp = isHttp
         self.task = task
         self.session = Session.newSession(task)
+    }
+    
+    func replace(_ head: HTTPRequestHead) -> HTTPRequestHead {
+        
+        var newHead = HTTPRequestHead(version: head.version, method: head.method, uri: head.uri, headers: head.headers)
+        
+        let uri = newHead.uri
+        if !uri.starts(with: "/"), let hostStr = head.headers["Host"].first {
+            if let newUri = uri.components(separatedBy: hostStr).last {
+                newHead.uri = newUri
+            }
+        }
+        // 重定向修改host
+        let newHost = self.task.rule.redirect(ignore: self.session.ignore, request: self.request!)
+        newHead.headers.remove(name: "Host")
+        newHead.headers.add(name: "Host", value: "\(newHost.0):\(newHost.1)")
+        
+        // query参数修改
+        let query = self.task.rule.getFalsify(ignore: self.session.ignore, request: self.request!, type: 0, key: "req_param")
+        if query != nil {
+            let path = newHead.uri.split(separator: "?")[0]
+            newHead.uri = "\(path)?\(query!.stringValue)"
+        }
+        
+        return newHead
     }
 }

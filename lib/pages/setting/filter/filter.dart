@@ -4,10 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tomduck/config/app_config.dart';
 import 'package:tomduck/database/database.dart';
 
-const FILTER_MODE_KEY = 'filter_mode_key';
-const WHITE_LIST_KEY = 'white_list_key';
-const BLACK_LIST_KEY = 'black_list_key';
-
 class Filter extends StatefulWidget {
   @override
   State<Filter> createState() => _FilterState();
@@ -23,15 +19,15 @@ class _FilterState extends State<Filter> {
   @override
   void initState() {
     super.initState();
-    var mode = Database.sharedPreferences?.getInt(FILTER_MODE_KEY) ?? -1;
+    var mode = Database.sharedPreferences?.getInt(AppConfig.cacheKey[CacheKey.FILTER_MODE_KEY]!) ?? -1;
     if (mode != -1) {
       _filterMode = mode == 0 ? '白名单' : '黑名单';
     }
 
     var whiteList =
-        Database.sharedPreferences?.getStringList(WHITE_LIST_KEY) ?? [];
+        Database.sharedPreferences?.getStringList(AppConfig.cacheKey[CacheKey.WHITE_LIST_KEY]!) ?? [];
     var blackList =
-        Database.sharedPreferences?.getStringList(BLACK_LIST_KEY) ?? [];
+        Database.sharedPreferences?.getStringList(AppConfig.cacheKey[CacheKey.BLACK_LIST_KEY]!) ?? [];
     setState(() {
       _whiteList.addAll(whiteList);
       _blackList.addAll(blackList);
@@ -48,16 +44,17 @@ class _FilterState extends State<Filter> {
     if (_filterMode != '不使用') {
       mode = _filterMode == '白名单' ? 0 : 1;
     }
-    Database.sharedPreferences?.setInt(FILTER_MODE_KEY, mode);
+    Database.sharedPreferences?.setInt(AppConfig.cacheKey[CacheKey.FILTER_MODE_KEY]!, mode);
     _whiteList.removeWhere((element) => element == '');
     _blackList.removeWhere((element) => element == '');
-    Database.sharedPreferences?.setStringList(WHITE_LIST_KEY, _whiteList);
-    Database.sharedPreferences?.setStringList(BLACK_LIST_KEY, _blackList);
+    Database.sharedPreferences?.setStringList(AppConfig.cacheKey[CacheKey.WHITE_LIST_KEY]!, _whiteList);
+    Database.sharedPreferences?.setStringList(AppConfig.cacheKey[CacheKey.BLACK_LIST_KEY]!, _blackList);
     BrnToast.show(
       "保存成功",
       context,
       duration: BrnDuration.short,
     );
+    Navigator.pop(context);
   }
 
   @override

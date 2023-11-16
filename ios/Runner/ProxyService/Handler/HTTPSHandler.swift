@@ -87,17 +87,11 @@ class HTTPSHandler: ChannelInboundHandler, RemovableChannelHandler {
                     self.proxyContext.session.state = -1
                     context.channel.close(mode: .all,promise: nil)
                 }
-                // 判断规则，是否拦截，copy等
-//                proxyContext.session.ignore = proxyContext.task.rule.matching(host: proxyContext.session.host ?? "",uri: head.uri, target: proxyContext.session.target ?? "")
-//                print("HTTPSHandler匹配")
-//                if proxyContext.task.rule.defaultStrategy == .COPY {
-//                    proxyContext.session.ignore = !proxyContext.session.ignore
-//                }
-                if true {
-                    _ = context.pipeline.addHandler(SSLHandler(proxyContext: proxyContext,scheduled:cancelTask), name: "SSLHandler", position: .first)
+
+                if !proxyContext.session.ignore {
+                    _ = context.pipeline.addHandler(SSLHandler(proxyContext: proxyContext, scheduled: cancelTask), name: "SSLHandler", position: .first)
                 } else {
                     _ = context.pipeline.addHandler(TunnelProxyHandler(proxyContext: proxyContext, isOut: false,scheduled:cancelTask), name: "TunnelProxyHandler", position: .first)
-//                    proxyContext.session.note = "no cert config !"
                 }
                 return
             }
@@ -114,6 +108,7 @@ class HTTPSHandler: ChannelInboundHandler, RemovableChannelHandler {
             if proxyContext.request == nil {
                 proxyContext.request = ProxyRequest(head)
                 proxyContext.request?.ssl = true
+                proxyContext.session.ignore = proxyContext.task.rule.matchFilter(head.uri)
             }
         case .body(_),.end(_):
             break

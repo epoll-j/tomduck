@@ -29,21 +29,44 @@ class _FlowCardState extends State<FlowCard> {
             _proxyStore.state == 0 ? '未开启网络监控' : '已开启网络监控',
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          Text('已运行${_proxyStore.time}秒')
+          Text(_getTimeStr())
         ],
       ),
     );
+  }
+
+  String _getTimeStr() {
+    if (_proxyStore.time < 60) {
+      return '已运行${_proxyStore.time}秒';
+    }
+    return '已运行${(_proxyStore.time / 60).toStringAsFixed(0)}分${_proxyStore.time % 60}秒';
+  }
+
+  String _getFlowStr(num flow) {
+    if (flow < 1024) {
+      return flow.toStringAsFixed(2);
+    }
+
+    return (flow / 1024.0).toStringAsFixed(2);
+  }
+
+  String _getFlowUnitStr(num flow) {
+    if (flow < 1024) {
+      return 'kb';
+    }
+
+    return 'mb';
   }
 
   Widget statistics() {
     return BrnEnhanceNumberCard(
       rowCount: 3,
       itemTextAlign: TextAlign.left,
-      padding: const EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(left: 10),
       itemChildren: [
         BrnNumberInfoItemModel(title: '抓包数量', number: _proxyStore.packageCount.toString(), lastDesc: '个'),
-        BrnNumberInfoItemModel(title: '数据上传', number: _proxyStore.uploadFlow.toStringAsFixed(2), lastDesc: 'kb'),
-        BrnNumberInfoItemModel(title: '数据下载', number: _proxyStore.downloadFlow.toStringAsFixed(2), lastDesc: 'kb'),
+        BrnNumberInfoItemModel(title: '数据上传', number: _getFlowStr(_proxyStore.uploadFlow), lastDesc: _getFlowUnitStr(_proxyStore.uploadFlow)),
+        BrnNumberInfoItemModel(title: '数据下载', number: _getFlowStr(_proxyStore.downloadFlow), lastDesc: _getFlowUnitStr(_proxyStore.downloadFlow)),
       ],
     );
   }

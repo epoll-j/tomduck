@@ -45,14 +45,14 @@ import Flutter
                 case "start_proxy":
                     if let arg = call.arguments as? NSDictionary {
                         if (self.proxyService == nil) {
-                            self.proxyService = ProxyService.create(arg["taskId"] as! NSNumber)
+                            self.proxyService = ProxyService.create(arg)
                         }
                     }
                     
                     self.proxyService?.run({ _ in
                         result(["code": 1, "data": ["wifi": NetworkInfo.LocalWifiIPv4(), ]] as [String : Any])
                     })
-                case "close_proxy":
+                case "stop_proxy":
                     self.proxyService?.close({
                         self.proxyService = nil
                         result(["code": 1])

@@ -54,7 +54,51 @@ public extension String{
         }
     }
 
-    func toByteBuffer() -> ByteBuffer {
-        return ByteBuffer(string: self)
+    func toByteBuffer(_ limit: Int = 2048) -> [ByteBuffer] {
+        var bufferArray: [ByteBuffer] = []
+        let strArr = self.toArray(by: limit)
+        
+        for str in strArr {
+            var buffer = ByteBufferAllocator().buffer(capacity: limit)
+            buffer.writeString(str)
+            bufferArray.append(buffer)
+        }
+        return bufferArray
+    }
+    
+    func matchesWildcardPattern(_ pattern: String) -> Bool {
+        let regexPattern = pattern.replacingOccurrences(of: "*", with: ".*")
+        do {
+            let regex = try NSRegularExpression(pattern: regexPattern, options: .caseInsensitive)
+            return !regex.matches(in: self, range: NSRange(location: 0, length: self.utf16.count)).isEmpty
+        } catch {
+            print("正则表达式创建失败：\(error)")
+            return false
+        }
+    }
+    
+    func clearFormat() -> String {
+        return self.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\\", with: "")
+    }
+    
+    func get(_ empty: String) -> String {
+        if self.isEmpty || self == "" {
+            return empty
+        }
+        return self
+    }
+    
+    func toArray(by length: Int) -> [String] {
+        var result = [String]()
+        var currentIndex = startIndex
+        
+        while currentIndex < endIndex {
+            let endIndex = self.index(currentIndex, offsetBy: length, limitedBy: self.endIndex) ?? self.endIndex
+            let substring = self[currentIndex..<endIndex]
+            result.append(String(substring))
+            currentIndex = endIndex
+        }
+        
+        return result
     }
 }

@@ -52,6 +52,8 @@ public class Session {
     public var state: NSNumber = 1
     public var note: String?
     
+    public var ignore = false
+    
     public let random = arc4random()
     
     public static func newSession(_ task: Task) -> Session {
@@ -72,11 +74,18 @@ public class Session {
     }
     
     public func save() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "save_session"), object: JSONSerializer.toJson(self))
+        if self.ignore {
+            return
+        }
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "save_session"), object: JSONSerializer.toJson(self))
+        }
     }
     
     public func writeBody() {
-        
+        if self.ignore {
+            return
+        }
     }
     
     static func getIPAddress(socketAddress: SocketAddress?) -> String {

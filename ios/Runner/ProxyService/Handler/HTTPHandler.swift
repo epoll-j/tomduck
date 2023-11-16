@@ -12,6 +12,7 @@ import NIOHTTP1
 import NIOConcurrencyHelpers
 import NIOSSL
 import Network
+import SwiftyJSON
 
 class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
     
@@ -20,6 +21,7 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
     var connected: Bool
     var proxyContext: ProxyContext
     var requestDatas = [Any]()
+    var isSendBody = false
     var cf: EventLoopFuture<Channel>?
     
     init(proxyContext: ProxyContext) {
@@ -51,17 +53,21 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
             
             proxyContext.session.save()
             
-            let uri = head.uri
-            if !uri.starts(with: "/"), let hostStr = head.headers["Host"].first {
-                if let newUri = uri.components(separatedBy: hostStr).last {
-                    head.uri = newUri
-                }
-            }
-            handleData(head)
+            handleData(proxyContext.replace(head))
             break
         case .body(let body):
             proxyContext.session.writeBody()
-            handleData(body)
+            let reqBody = proxyContext.task.rule.getFalsify(ignore: proxyContext.session.ignore, request: proxyContext.request!, type: 0, key: "req_body")
+            if reqBody != nil {
+                if (!isSendBody) {
+                    isSendBody = true
+                    for buff in reqBody!.stringValue.toByteBuffer() {
+                        handleData(buff)
+                    }
+                }
+            } else {
+                handleData(body)
+            }
             break
         case .end(let end):
             handleData(end, isEnd: true)
@@ -77,6 +83,7 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
             return
         }
         var channelInitializer: ((Channel) -> EventLoopFuture<Void>)?
+        let connectHost = proxyContext.task.rule.redirect(ignore: proxyContext.session.ignore, request: request)
         if request.ssl {
             // TODO:添加握手超时断开
             channelInitializer = { (outChannel) -> EventLoopFuture<Void> in
@@ -85,9 +92,7 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
                 tlsClientConfiguration.applicationProtocols = ["http/1.1"]
                 let sslClientContext = try! NIOSSLContext(configuration: tlsClientConfiguration)
                 
-                let sniName = request.host.isIP() ? nil : request.host
-                
-                let sslClientHandler = try! NIOSSLClientHandler(context: sslClientContext, serverHostname: sniName)
+                let sslClientHandler = try! NIOSSLClientHandler(context: sslClientContext, serverHostname: connectHost.0.isIP() ? nil : connectHost.0)
                 let applicationProtocolNegotiationHandler = ApplicationProtocolNegotiationHandler { (result) -> EventLoopFuture<Void> in
                     self.connected = true
                     self.proxyContext.session.handshake_time = NSNumber(value: Date().timeIntervalSince1970) //握手结束时间
@@ -119,7 +124,7 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
         
         let clientBootstrap = ClientBootstrap(group: proxyContext.serverChannel!.eventLoop.next())//SO_SNDTIMEO
             .channelInitializer(channelInitializer!)
-        cf = clientBootstrap.connect(host: request.host, port: request.port)
+        cf = clientBootstrap.connect(host: connectHost.0, port: connectHost.1)
         cf!.whenComplete { result in
             switch result {
             case .success(let outChannel):
@@ -142,7 +147,7 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
         }
     }
     
-    func sendData(data:Any) {
+    func sendData(data: Any) {
         if let head = data as? HTTPRequestHead {
             let clientHead = HTTPRequestHead(version: head.version, method: head.method, uri: head.uri, headers: head.headers)
             _ = proxyContext.clientChannel!.writeAndFlush(HTTPClientRequestPart.head(clientHead))
@@ -200,6 +205,9 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
         case .head(let head):
             if proxyContext.request == nil {
                 proxyContext.request = ProxyRequest(head)
+                if !proxyContext.request!.ssl {
+                    proxyContext.session.ignore = proxyContext.task.rule.matchFilter(head.uri)
+                }
             }
         case .body(_),.end(_):
             break
@@ -221,5 +229,9 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
     }
     
     func userInboundEventTriggered(context: ChannelHandlerContext, event: Any) {
+    }
+    
+    private func _getHeader(origin: HTTPRequestHead) -> HTTPRequestHead {
+        return origin
     }
 }

@@ -3,7 +3,19 @@ import 'package:flutter/material.dart';
 import 'app_env.dart' show appEnv;
 import '../routes/route_name.dart';
 
+enum CacheKey {
+  FILTER_MODE_KEY,
+  WHITE_LIST_KEY,
+  BLACK_LIST_KEY,
+}
+
 class AppConfig {
+  static Map<CacheKey, String> cacheKey = {
+    CacheKey.FILTER_MODE_KEY: 'filter_mode_key',
+    CacheKey.WHITE_LIST_KEY: 'white_list_key',
+    CacheKey.BLACK_LIST_KEY: 'black_list_key'
+  };
+
   /// 设计稿尺寸 宽750 高1334
   static Size screenSize = const Size(750, 1334);
   /// 背景色

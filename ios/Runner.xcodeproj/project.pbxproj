@@ -28,9 +28,14 @@
 		468F0EDD2A8BD80B0081D473 /* ProxyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */; };
 		468F0EDF2A8BD8A10081D473 /* NetworkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */; };
 		468F0EE12A8BD94E0081D473 /* HTTPMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EE02A8BD94E0081D473 /* HTTPMatcher.swift */; };
+		46904EF62AFCF983008A6F0B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46904EF52AFCF983008A6F0B /* Filter.swift */; };
+		46904EF82AFDC529008A6F0B /* Falsify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46904EF72AFDC529008A6F0B /* Falsify.swift */; };
+		46904EFA2AFE1F57008A6F0B /* TaskRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46904EF92AFE1F57008A6F0B /* TaskRule.swift */; };
 		46C48E5E2A8882FC001091A4 /* ProtocolDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */; };
 		46C48E602A888365001091A4 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5F2A888365001091A4 /* Matcher.swift */; };
 		46D32EEA2A9B481000F8C434 /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 46D32EE92A9B481000F8C434 /* NIOSSL */; };
+		46E9D1D82B01FF630075D3B0 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9D1D72B01FF630075D3B0 /* NSObject+Extension.swift */; };
+		46E9D1DB2B0201F20075D3B0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 46E9D1DA2B0201F20075D3B0 /* SwiftyJSON */; };
 		46F61DDE2AD2520200D97070 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F61DDD2AD2520200D97070 /* Task.swift */; };
 		46F61DE02AD2533F00D97070 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F61DDF2AD2533F00D97070 /* Session.swift */; };
 		46F61DE42AD2800800D97070 /* Data+Gzip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F61DE12AD2800800D97070 /* Data+Gzip.swift */; };
@@ -77,10 +82,14 @@
 		468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyRequest.swift; sourceTree = "<group>"; };
 		468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInfo.swift; sourceTree = "<group>"; };
 		468F0EE02A8BD94E0081D473 /* HTTPMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMatcher.swift; sourceTree = "<group>"; };
+		46904EF52AFCF983008A6F0B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		46904EF72AFDC529008A6F0B /* Falsify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Falsify.swift; sourceTree = "<group>"; };
+		46904EF92AFE1F57008A6F0B /* TaskRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRule.swift; sourceTree = "<group>"; };
 		46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDetector.swift; sourceTree = "<group>"; };
 		46C48E5F2A888365001091A4 /* Matcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
 		46D32EE62A9B47BA00F8C434 /* swift-nio-ssl */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-nio-ssl"; path = "../../swift-nio-ssl"; sourceTree = "<group>"; };
 		46D32EE72A9B47F100F8C434 /* swift-nio-ssl */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-nio-ssl"; path = "../../swift-nio-ssl"; sourceTree = "<group>"; };
+		46E9D1D72B01FF630075D3B0 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		46F61DDD2AD2520200D97070 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		46F61DDF2AD2533F00D97070 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		46F61DE12AD2800800D97070 /* Data+Gzip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Gzip.swift"; sourceTree = "<group>"; };
@@ -108,6 +117,7 @@
 			files = (
 				462A000F2A910EC70054B80B /* NIOTLS in Frameworks */,
 				462A000B2A910EC70054B80B /* NIOCore in Frameworks */,
+				46E9D1DB2B0201F20075D3B0 /* SwiftyJSON in Frameworks */,
 				E1904CB3616A9B189A9E669B /* Pods_Runner.framework in Frameworks */,
 				46D32EEA2A9B481000F8C434 /* NIOSSL in Frameworks */,
 				462A00122A91119D0054B80B /* NIOTransportServices in Frameworks */,
@@ -132,13 +142,12 @@
 		468196152A8798B400C88A04 /* ProxyService */ = {
 			isa = PBXGroup;
 			children = (
+				46904EF42AFCF95E008A6F0B /* Model */,
 				468F0ED92A8BD7840081D473 /* Utils */,
 				468F0ED22A8BD6880081D473 /* Handler */,
 				468F0ECF2A8BD5990081D473 /* Extension */,
 				46C48E5C2A8882D2001091A4 /* Detector */,
 				468196162A8798D500C88A04 /* ProxyService.swift */,
-				46F61DDD2AD2520200D97070 /* Task.swift */,
-				46F61DDF2AD2533F00D97070 /* Session.swift */,
 			);
 			path = ProxyService;
 			sourceTree = "<group>";
@@ -150,6 +159,7 @@
 				46F61DE12AD2800800D97070 /* Data+Gzip.swift */,
 				46F61DE32AD2800800D97070 /* Dictionary+Json.swift */,
 				468F0ED02A8BD5D60081D473 /* String+Extension.swift */,
+				46E9D1D72B01FF630075D3B0 /* NSObject+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -177,6 +187,18 @@
 				46F61DE72AD2A66400D97070 /* JSONSerializer.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		46904EF42AFCF95E008A6F0B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				46904EF92AFE1F57008A6F0B /* TaskRule.swift */,
+				46F61DDD2AD2520200D97070 /* Task.swift */,
+				46F61DDF2AD2533F00D97070 /* Session.swift */,
+				46904EF52AFCF983008A6F0B /* Filter.swift */,
+				46904EF72AFDC529008A6F0B /* Falsify.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		46C48E5C2A8882D2001091A4 /* Detector */ = {
@@ -282,6 +304,7 @@
 				462A000E2A910EC70054B80B /* NIOTLS */,
 				462A00112A91119D0054B80B /* NIOTransportServices */,
 				46D32EE92A9B481000F8C434 /* NIOSSL */,
+				46E9D1DA2B0201F20075D3B0 /* SwiftyJSON */,
 			);
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
@@ -293,7 +316,7 @@
 		97C146E61CF9000F007C117D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
@@ -315,6 +338,7 @@
 				462A00072A910EC70054B80B /* XCRemoteSwiftPackageReference "swift-nio" */,
 				462A00102A91119D0054B80B /* XCRemoteSwiftPackageReference "swift-nio-transport-services" */,
 				46D32EE82A9B481000F8C434 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */,
+				46E9D1D92B0201F20075D3B0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
@@ -418,9 +442,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				46F61DE42AD2800800D97070 /* Data+Gzip.swift in Sources */,
+				46904EF62AFCF983008A6F0B /* Filter.swift in Sources */,
 				46F61DE02AD2533F00D97070 /* Session.swift in Sources */,
 				468F0EDB2A8BD7950081D473 /* ProxyContext.swift in Sources */,
 				463792472A92421B002BC7E8 /* CertUtils.swift in Sources */,
+				46904EFA2AFE1F57008A6F0B /* TaskRule.swift in Sources */,
 				4637923D2A92193B002BC7E8 /* HTTPSMatcher.swift in Sources */,
 				468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */,
 				468F0ED42A8BD69B0081D473 /* HTTPHandler.swift in Sources */,
@@ -428,6 +454,7 @@
 				46F61DE52AD2800800D97070 /* Data+Compression.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				46904EF82AFDC529008A6F0B /* Falsify.swift in Sources */,
 				468F0ED62A8BD7140081D473 /* ExchangeHandler.swift in Sources */,
 				46F61DE62AD2800800D97070 /* Dictionary+Json.swift in Sources */,
 				468F0ED82A8BD73D0081D473 /* ChannelWatchHandler.swift in Sources */,
@@ -441,6 +468,7 @@
 				463792432A921B37002BC7E8 /* SSLHandler.swift in Sources */,
 				468196172A8798D500C88A04 /* ProxyService.swift in Sources */,
 				463792412A921A92002BC7E8 /* TunnelProxyHandler.swift in Sources */,
+				46E9D1D82B01FF630075D3B0 /* NSObject+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +765,14 @@
 				kind = branch;
 			};
 		};
+		46E9D1D92B0201F20075D3B0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -769,6 +805,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 46D32EE82A9B481000F8C434 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */;
 			productName = NIOSSL;
+		};
+		46E9D1DA2B0201F20075D3B0 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46E9D1D92B0201F20075D3B0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
