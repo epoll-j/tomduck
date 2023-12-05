@@ -8,8 +8,10 @@ class BasicScaffold extends StatelessWidget {
   final Widget child;
   final FloatingActionButton? floatingActionButton;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final Color? backgroundColor;
+  final EdgeInsets? padding;
 
-  const BasicScaffold({super.key, required this.title, this.floatingActionButton, this.floatingActionButtonLocation, required this.child});
+  const BasicScaffold({super.key, required this.title, this.floatingActionButton, this.floatingActionButtonLocation, required this.child, this.backgroundColor, this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,11 @@ class BasicScaffold extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      backgroundColor: AppConfig.backgroundColor,
+      backgroundColor: backgroundColor ?? AppConfig.backgroundColor,
       floatingActionButton: floatingActionButton,
       floatingActionButtonLocation: floatingActionButtonLocation,
       body: Container(
-        padding: EdgeInsets.all(15.w),
+        padding: padding ?? EdgeInsets.all(15.w),
         child: child,
       ),
     );

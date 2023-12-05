@@ -55,6 +55,7 @@ class SessionModel extends BaseModel {
         
         note TEXT,
         state INTEGER,
+        random INTEGER,
 
         update_time INTEGER,
         create_time INTEGER

@@ -22,6 +22,7 @@ public class ProxyService: NSObject {
     }
     
     var task: Task!
+    public static var storeFolder = ""
     let master = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
     let worker = MultiThreadedEventLoopGroup(numberOfThreads: 3 * System.coreCount)
     
@@ -57,6 +58,7 @@ public class ProxyService: NSObject {
     public func run(_ callback: @escaping ((Result<Int, Error>) -> Void)) -> Void {
         compelete = callback
         task.startTime = NSNumber(value: Date().timeIntervalSince1970)
+        task.createFileFolder()
         DispatchQueue.global().async {
             self.openWifiServer(host: "0.0.0.0", port: Int(truncating: DEFAULT_PORT)) { _ in
                 self.runCompelete()
@@ -123,4 +125,31 @@ public class ProxyService: NSObject {
             }
         }
     }
+    
+    public static func getStoreFolder() -> String {
+        if storeFolder != "" {
+           return storeFolder
+        }
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let storeURL = documentsDirectory.appendingPathComponent("Task")
+        var isDir : ObjCBool = false
+        let isExits = fileManager.fileExists(atPath: storeURL.absoluteString, isDirectory: &isDir)
+        if isExits {
+            if isDir.boolValue {
+                return storeURL.absoluteString
+            } else {
+                try? fileManager.removeItem(at: storeURL)
+            }
+        }
+        try? fileManager.createDirectory(at: storeURL, withIntermediateDirectories: true, attributes: nil)
+        let fullPath = storeURL.absoluteString
+       
+        storeFolder = fullPath.replacingOccurrences(of: "file://", with: "")
+        if storeFolder.last != "/"{
+           storeFolder = "\(storeFolder)/"
+        }
+       
+        return storeFolder
+   }
 }

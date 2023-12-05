@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+import 'package:tomduck/pages/app_main/history/history_item.dart';
+import 'package:tomduck/pages/app_main/history/session_detail.dart';
 import 'package:tomduck/pages/setting/falsify/falsify_edit.dart';
 import 'package:tomduck/pages/setting/filter/filter.dart';
 import '../pages/setting/falsify/falsify.dart';
@@ -23,4 +26,6 @@ final Map<String,
   RouteName.filter: (context, {params}) => Filter(),
   RouteName.falsify: (context, {params}) => Falsify(params: params),
   RouteName.falsifyEdit: (context, {params}) => FalsifyEdit(params: params),
+  RouteName.historyItem: (context, {params}) => HistoryItem(params: params),
+  RouteName.sessionDetail: (context, {params}) => SessionDetail(params: params),
 };

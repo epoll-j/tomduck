@@ -40,7 +40,7 @@ class ChannelTools {
     var data = jsonDecode(event['data']);
     var id = data.remove('id');
     if (eventName == 'save_session') {
-      var random = data.remove('random');
+      var random = data['random'];
       var ignore = data.remove('ignore');
       if (!ignore) {
         if (id == '' || id == null) {

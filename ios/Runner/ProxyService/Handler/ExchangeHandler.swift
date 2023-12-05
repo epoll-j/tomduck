@@ -50,10 +50,29 @@ class ExchangeHandler: ChannelInboundHandler, RemovableChannelHandler {
             } else {
                 _ = proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.body(.byteBuffer(body)))
             }
-            proxyContext.session.writeBody()
+            
+            if proxyContext.session.fileName.isEmpty {
+                if let fileName = proxyContext.session.uri?.getFileName() {
+                    proxyContext.session.fileName = fileName
+                    proxyContext.session.save()
+                }
+                let nameSplit = proxyContext.session.fileName.components(separatedBy: ".")
+                if nameSplit.count < 2 {
+                    let type = proxyContext.session.response_content_type!.getRealType()
+                    if !type.isEmpty {
+                        proxyContext.session.fileName = "\(proxyContext.session.fileName).\(type)"
+                        proxyContext.session.save()
+                    }
+                }
+                
+            }
+            
+            proxyContext.session.writeBody(type: .Response, buffer: body, realName: proxyContext.session.fileName)
         case .end(let tailHeaders):
             proxyContext.session.response_end_time = NSNumber(value: Date().timeIntervalSince1970) // 接收完毕响应
+            proxyContext.session.save()
             gotEnd = true
+            proxyContext.session.writeBody(type: .Response, buffer: nil, realName: proxyContext.session.fileName)
             let promise = proxyContext.serverChannel?.eventLoop.makePromise(of: Void.self)
             proxyContext.serverChannel?.writeAndFlush(HTTPServerResponsePart.end(tailHeaders), promise: promise)
             promise?.futureResult.whenComplete({ (_) in

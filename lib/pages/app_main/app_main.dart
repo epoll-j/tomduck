@@ -2,7 +2,6 @@ import 'package:ana_page_loop/ana_page_loop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:jh_debug/jh_debug.dart';
 import 'package:provider/provider.dart';
 import '../../routes/route_name.dart';
 import '../../components/update_app/check_app_version.dart'
@@ -88,9 +87,9 @@ class _AppMainState extends State<AppMain>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       appPageStore.saveController(pageController);
 
-      if (AppConfig.showJhDebugBtn) {
-        jhDebug.showDebugBtn(); // jhDebug 调试按钮
-      }
+      // if (AppConfig.showJhDebugBtn) {
+      //   jhDebug.showDebugBtn(); // jhDebug 调试按钮
+      // }
 
       checkAppVersion(); // 更新APP版本检查
 
@@ -128,21 +127,21 @@ class _AppMainState extends State<AppMain>
   /// 初始化第三方插件插件
   initTools() {
     // jhDebug插件初始化
-    jhDebug.init(
-      context: context,
-      btnTitle1: '开发',
-      btnTap1: () {
-        appEnv.setEnv = ENV.DEV;
-        AppConfig.host = appEnv.baseUrl;
-      },
-      btnTitle2: '调试',
-      btnTap2: () {},
-      btnTitle3: '生产',
-      btnTap3: () {
-        appEnv.setEnv = ENV.PROD;
-        AppConfig.host = appEnv.baseUrl;
-      },
-    );
+    // jhDebug.init(
+    //   context: context,
+    //   btnTitle1: '开发',
+    //   btnTap1: () {
+    //     appEnv.setEnv = ENV.DEV;
+    //     AppConfig.host = appEnv.baseUrl;
+    //   },
+    //   btnTitle2: '调试',
+    //   btnTap2: () {},
+    //   btnTitle3: '生产',
+    //   btnTap3: () {
+    //     appEnv.setEnv = ENV.PROD;
+    //     AppConfig.host = appEnv.baseUrl;
+    //   },
+    // );
   }
 
   /// 实现PageViewListenerMixin类上的方法，供页面埋点使用

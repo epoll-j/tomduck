@@ -56,7 +56,7 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
             handleData(proxyContext.replace(head))
             break
         case .body(let body):
-            proxyContext.session.writeBody()
+            proxyContext.session.writeBody(type: .Request, buffer: body)
             let reqBody = proxyContext.task.rule.getFalsify(ignore: proxyContext.session.ignore, request: proxyContext.request!, type: 0, key: "req_body")
             if reqBody != nil {
                 if (!isSendBody) {
@@ -71,6 +71,7 @@ class HTTPHandler : ChannelInboundHandler, RemovableChannelHandler {
             break
         case .end(let end):
             handleData(end, isEnd: true)
+            proxyContext.session.writeBody(type: .Request, buffer: nil)
             break
         }
         context.fireChannelRead(data)

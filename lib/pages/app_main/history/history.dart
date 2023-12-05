@@ -1,15 +1,19 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:intl/intl.dart';
 import 'package:tomduck/database/session_model.dart';
 import 'package:tomduck/database/task_model.dart';
 
+import '../../../components/layouts/basic_scaffold.dart';
+import '../../../config/app_config.dart';
+
 class History extends StatefulWidget {
   @override
-  State<History> createState() => _HotState();
+  State<History> createState() => _HistoryState();
 }
 
-class _HotState extends State<History> {
+class _HistoryState extends State<History> {
   List historyData = [];
   final dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -26,16 +30,9 @@ class _HotState extends State<History> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('抓包记录'),
-        titleTextStyle: const TextStyle(color: Colors.black),
-        // elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-      ),
-      backgroundColor: const Color.fromRGBO(244, 244, 244, 1),
-      body: RefreshIndicator(
+    return BasicScaffold(
+      title: '抓包记录',
+      child: RefreshIndicator(
         onRefresh: () async {
           loadHistory();
         },
@@ -44,7 +41,9 @@ class _HotState extends State<History> {
           itemCount: historyData.length,
           itemBuilder: (context, index) => _buildItem(historyData[index]),
           separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(height: 10,);
+            return const SizedBox(
+              height: 10,
+            );
           },
         ),
       ),
@@ -52,32 +51,87 @@ class _HotState extends State<History> {
   }
 
   Widget _buildItem(dynamic history) {
-    return FractionallySizedBox(
-      widthFactor: 0.95,
-      child: BrnShadowCard(
-          padding: const EdgeInsets.all(10),
-          child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(dateFormat.format(DateTime.fromMillisecondsSinceEpoch(history['create_time'])), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                Text("持续时间：${getTime((history['update_time'] - history['create_time']) / 1000)}"),
-              ],
-            ),
-            SizedBox.fromSize(size: const Size.fromHeight(10),),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("${history['count']}次请求", style: const TextStyle(color: Colors.grey),),
-                Text("20分33秒", style: TextStyle(color: Colors.grey)),
-              ],
-            )
-          ])
+    return SwipeActionCell(
+      key: Key('${history['id']}'),
+      backgroundColor: AppConfig.backgroundColor,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, "/historyItem", arguments: history);
+        },
+        child: FractionallySizedBox(
+          widthFactor: 0.95,
+          child: BrnShadowCard(
+              padding: const EdgeInsets.all(10),
+              child: Column(children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      dateFormat.format(DateTime.fromMillisecondsSinceEpoch(
+                          history['create_time'])),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                        "持续时间：${_getTime((history['update_time'] - history['create_time']) / 1000)}"),
+                  ],
+                ),
+                SizedBox.fromSize(
+                  size: const Size.fromHeight(10),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "${history['count']}次请求",
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.upload,
+                          color: Colors.grey,
+                          size: 15,
+                        ),
+                        Text(
+                          _getFlowStr(history['upload_flow']),
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Icon(
+                          Icons.download,
+                          color: Colors.grey,
+                          size: 15,
+                        ),
+                        Text(
+                          _getFlowStr(history['download_flow']),
+                          style: const TextStyle(color: Colors.grey),
+                        )
+                      ],
+                    )
+                  ],
+                )
+              ])),
+        ),
       ),
     );
   }
-  String getTime(double time) {
+
+  String _getTime(double time) {
+    if (time < 0) {
+      return '0秒';
+    }
     return '${time ~/ 60}分${(time % 60).toInt()}秒';
+  }
+
+  String _getFlowStr(num flow) {
+    if (flow < 1024) {
+      return '${flow.toStringAsFixed(2)}kb';
+    }
+
+    return '${(flow / 1024).toStringAsFixed(2)}mb';
   }
 
   void loadHistory() async {

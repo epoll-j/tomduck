@@ -79,7 +79,7 @@ public class JSONSerializer {
     - parameter object:    The instantiation of any custom class to be represented as JSON.
     - returns: A string JSON representation of the object.
     */
-    public static func toJson(_ object: Any, prettify: Bool = false) -> String {
+    public static func toJson(_ object: Any, prettify: Bool = false, ignore: [String] = []) -> String {
         var json = ""
         if (!(object is Array<Any>)) {
             json += "{"
@@ -129,6 +129,11 @@ public class JSONSerializer {
             skip = false
             
             let propertyName = optionalPropertyName
+            
+            if ignore.contains(propertyName ?? "nil") {
+                continue
+            }
+            
             let property = Mirror(reflecting: value)
             
             var handledValue = String()
@@ -266,6 +271,8 @@ public class JSONSerializer {
            let prettyJsonData = try! JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
            json = NSString(data: prettyJsonData, encoding: String.Encoding.utf8.rawValue)! as String
         }
+        
+        json = json.replacingOccurrences(of: ", }", with: "}")
         
         return json
     }

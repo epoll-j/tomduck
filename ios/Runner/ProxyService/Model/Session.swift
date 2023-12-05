@@ -9,6 +9,11 @@ import Foundation
 import NIOCore
 import NIOHTTP1
 
+public enum FileType {
+    case Request
+    case Response
+}
+
 public class Session {
     public var id: NSNumber?
     public var task_id: NSNumber!
@@ -56,10 +61,14 @@ public class Session {
     
     public let random = arc4random()
     
+    public var fileFolder = ""
+    public var fileName = ""
+    
     public static func newSession(_ task: Task) -> Session {
         let session = Session()
         session.task_id = task.id
         session.start_time = NSNumber(value: Date().timeIntervalSince1970)
+        session.fileFolder = task.fileFolder
         return session
     }
     
@@ -78,14 +87,44 @@ public class Session {
             return
         }
         DispatchQueue.main.async {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "save_session"), object: JSONSerializer.toJson(self))
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "save_session"), object: JSONSerializer.toJson(self, ignore: ["fileName", "fileFolder"]))
         }
     }
     
-    public func writeBody() {
+    public func writeBody(type: FileType, buffer: ByteBuffer?, realName: String = "") {
         if self.ignore {
             return
         }
+        
+        if request_body == nil, type == .Request {
+            request_body = "req_\(task_id.stringValue)_\(random)\(realName)"
+        }
+        if response_body == nil, type == .Response {
+            response_body = "rsp_\(task_id.stringValue)_\(random)\(realName)"
+        }
+        guard let body = buffer else {
+            return
+        }
+        
+        var filePath = type == .Request ? request_body : response_body
+        filePath = "\(ProxyService.getStoreFolder())\(fileFolder)/\(filePath!)"
+        let fileManager = FileManager.default
+        let exist = fileManager.fileExists(atPath: filePath!)
+        if !exist {
+            fileManager.createFile(atPath: filePath!, contents: nil, attributes: nil)
+        }
+        
+        guard let data = body.getData(at: body.readerIndex, length: body.readableBytes) else {
+            print("no data !")
+            return
+        }
+
+        let fileHandle = FileHandle(forWritingAtPath: filePath!)
+        if exist {
+            fileHandle?.seekToEndOfFile()
+        }
+        fileHandle?.write(data)
+        fileHandle?.closeFile()
     }
     
     static func getIPAddress(socketAddress: SocketAddress?) -> String {

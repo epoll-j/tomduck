@@ -23,4 +23,8 @@ class RouteName {
   static String falsify = '/falsify';
   /// 篡改编辑
   static String falsifyEdit = '/falsifyEdit';
+  /// session列表
+  static String historyItem = '/historyItem';
+
+  static String sessionDetail = '/sessionDetail';
 }
