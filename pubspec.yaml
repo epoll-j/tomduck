@@ -32,7 +32,7 @@ dependencies:
   synchronized: 3.1.0
   ota_update: 5.1.0
   package_info_plus: 4.1.0 # app相关信息获取
-  url_launcher: 6.1.12
+  url_launcher: ^6.2.2
   permission_handler: 10.4.3 # 权限
   fluttertoast: 8.2.2
   bruno: 3.4.0

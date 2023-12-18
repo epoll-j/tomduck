@@ -4,6 +4,7 @@ import 'package:tomduck/pages/app_main/history/history_item.dart';
 import 'package:tomduck/pages/app_main/history/session_detail.dart';
 import 'package:tomduck/pages/setting/falsify/falsify_edit.dart';
 import 'package:tomduck/pages/setting/filter/filter.dart';
+import 'package:tomduck/pages/setting/cert/cert.dart';
 import '../pages/setting/falsify/falsify.dart';
 import 'route_name.dart';
 import '../pages/error_page/error_page.dart';
@@ -28,4 +29,5 @@ final Map<String,
   RouteName.falsifyEdit: (context, {params}) => FalsifyEdit(params: params),
   RouteName.historyItem: (context, {params}) => HistoryItem(params: params),
   RouteName.sessionDetail: (context, {params}) => SessionDetail(params: params),
+  RouteName.cert: (context, {params}) => Cert(),
 };

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:tomduck/pages/app_main/setting/setting.dart';
 import '../../routes/route_name.dart';
 import '../../components/update_app/check_app_version.dart'
     show checkAppVersion;
@@ -72,9 +73,9 @@ class _AppMainState extends State<AppMain>
       'body': History(),
     },
     {
-      'title': '我的',
-      'icon': Icons.person,
-      'body': MyPersonal(),
+      'title': '设置',
+      'icon': Icons.settings,
+      'body': Setting(),
     },
   ];
 

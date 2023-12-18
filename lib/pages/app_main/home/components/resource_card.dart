@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bruno/bruno.dart';
+import 'package:provider/provider.dart';
+import 'package:tomduck/config/app_config.dart';
+import '../../../../provider/proxy.p.dart';
 import 'home_item_card.dart';
 
 class ResourceCard extends StatefulWidget {
@@ -8,15 +11,14 @@ class ResourceCard extends StatefulWidget {
 }
 
 class _ResourceCardState extends State<ResourceCard> {
-  var dataList = [
-    BrnDoughnutDataItem(title: '示例', value: 10, color: Colors.amber),
-    BrnDoughnutDataItem(title: '示例2', value: 40, color: Colors.blue),
-    BrnDoughnutDataItem(title: '示例4', value: 30, color: Colors.yellow),
-    BrnDoughnutDataItem(title: '示例5', value: 20, color: Colors.red)
-  ];
+  late ProxyStore _proxyStore;
+  List<Color> colors = [AppConfig.mainColor, Colors.redAccent, Colors.amber, Colors.blueGrey, Colors.deepPurpleAccent, Colors.limeAccent, Colors.brown, Colors.orangeAccent, Colors.teal, Colors.indigo, Colors.white30, Colors.black12, Colors.indigo, Colors.cyan, Colors.purple];
+  BrnDoughnutDataItem? selectedItem;
 
   @override
   Widget build(BuildContext context) {
+    _proxyStore = Provider.of<ProxyStore>(context);
+
     return HomeItemCard(children: [
       const Text(
         '资源类型',
@@ -27,6 +29,7 @@ class _ResourceCardState extends State<ResourceCard> {
   }
 
   Widget resourceCard() {
+    var dataList =_proxyStore.suffixList.asMap().keys.map((e) => BrnDoughnutDataItem(title: _proxyStore.suffixList[e]['suffix'], value: double.parse(_proxyStore.suffixList[e]['count'].toString()), color: colors[e])).toList();
     return Column(
       children: [
         BrnDoughnutChart(
@@ -34,13 +37,13 @@ class _ResourceCardState extends State<ResourceCard> {
           width: 200,
           height: 200,
           data: dataList,
-          // selectedItem: selectedItem,
+          selectedItem: selectedItem,
           showTitleWhenSelected: true,
-          // selectCallback: (BrnDoughnutDataItem? selectedItem) {
-          //   setState(() {
-          //     this.selectedItem = selectedItem;
-          //   });
-          // },
+          selectCallback: (BrnDoughnutDataItem? selectedItem) {
+            setState(() {
+              this.selectedItem = selectedItem;
+            });
+          },
         ),
         SizedBox(
           width: double.infinity,

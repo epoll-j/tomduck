@@ -19,6 +19,7 @@
 		463792412A921A92002BC7E8 /* TunnelProxyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792402A921A92002BC7E8 /* TunnelProxyHandler.swift */; };
 		463792432A921B37002BC7E8 /* SSLHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792422A921B37002BC7E8 /* SSLHandler.swift */; };
 		463792472A92421B002BC7E8 /* CertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463792462A92421B002BC7E8 /* CertUtils.swift */; };
+		465CD1302B2C23A4007D9BE0 /* CheckCert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465CD12F2B2C23A4007D9BE0 /* CheckCert.swift */; };
 		468196172A8798D500C88A04 /* ProxyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468196162A8798D500C88A04 /* ProxyService.swift */; };
 		468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED02A8BD5D60081D473 /* String+Extension.swift */; };
 		468F0ED42A8BD69B0081D473 /* HTTPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0ED32A8BD69B0081D473 /* HTTPHandler.swift */; };
@@ -28,14 +29,16 @@
 		468F0EDD2A8BD80B0081D473 /* ProxyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */; };
 		468F0EDF2A8BD8A10081D473 /* NetworkInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */; };
 		468F0EE12A8BD94E0081D473 /* HTTPMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468F0EE02A8BD94E0081D473 /* HTTPMatcher.swift */; };
-		46904EF62AFCF983008A6F0B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46904EF52AFCF983008A6F0B /* Filter.swift */; };
-		46904EF82AFDC529008A6F0B /* Falsify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46904EF72AFDC529008A6F0B /* Falsify.swift */; };
 		46904EFA2AFE1F57008A6F0B /* TaskRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46904EF92AFE1F57008A6F0B /* TaskRule.swift */; };
 		46C48E5E2A8882FC001091A4 /* ProtocolDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */; };
 		46C48E602A888365001091A4 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C48E5F2A888365001091A4 /* Matcher.swift */; };
 		46D32EEA2A9B481000F8C434 /* NIOSSL in Frameworks */ = {isa = PBXBuildFile; productRef = 46D32EE92A9B481000F8C434 /* NIOSSL */; };
-		46E9D1D82B01FF630075D3B0 /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E9D1D72B01FF630075D3B0 /* NSObject+Extension.swift */; };
 		46E9D1DB2B0201F20075D3B0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 46E9D1DA2B0201F20075D3B0 /* SwiftyJSON */; };
+		46F50B702B23078F0079FC94 /* LocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F50B6F2B23078F0079FC94 /* LocalService.swift */; };
+		46F50B732B230E990079FC94 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 46F50B722B230E990079FC94 /* Reachability */; };
+		46F50B752B2311020079FC94 /* HTTPServerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F50B742B2311020079FC94 /* HTTPServerHandler.swift */; };
+		46F50B772B23119D0079FC94 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F50B762B23119D0079FC94 /* Date+Extension.swift */; };
+		46F50B7C2B231EF90079FC94 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 46F50B7B2B231EF90079FC94 /* index.html */; };
 		46F61DDE2AD2520200D97070 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F61DDD2AD2520200D97070 /* Task.swift */; };
 		46F61DE02AD2533F00D97070 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F61DDF2AD2533F00D97070 /* Session.swift */; };
 		46F61DE42AD2800800D97070 /* Data+Gzip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F61DE12AD2800800D97070 /* Data+Gzip.swift */; };
@@ -68,11 +71,13 @@
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		16F1080A07411ECF155FFA09 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
+		46046E452B1DD1BB00F46077 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		4637923C2A92193B002BC7E8 /* HTTPSMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSMatcher.swift; sourceTree = "<group>"; };
 		4637923E2A9219BB002BC7E8 /* HTTPSHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPSHandler.swift; sourceTree = "<group>"; };
 		463792402A921A92002BC7E8 /* TunnelProxyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelProxyHandler.swift; sourceTree = "<group>"; };
 		463792422A921B37002BC7E8 /* SSLHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLHandler.swift; sourceTree = "<group>"; };
 		463792462A92421B002BC7E8 /* CertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertUtils.swift; sourceTree = "<group>"; };
+		465CD12F2B2C23A4007D9BE0 /* CheckCert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCert.swift; sourceTree = "<group>"; };
 		468196162A8798D500C88A04 /* ProxyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyService.swift; sourceTree = "<group>"; };
 		468F0ED02A8BD5D60081D473 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		468F0ED32A8BD69B0081D473 /* HTTPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHandler.swift; sourceTree = "<group>"; };
@@ -82,14 +87,15 @@
 		468F0EDC2A8BD80B0081D473 /* ProxyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyRequest.swift; sourceTree = "<group>"; };
 		468F0EDE2A8BD8A10081D473 /* NetworkInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInfo.swift; sourceTree = "<group>"; };
 		468F0EE02A8BD94E0081D473 /* HTTPMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMatcher.swift; sourceTree = "<group>"; };
-		46904EF52AFCF983008A6F0B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
-		46904EF72AFDC529008A6F0B /* Falsify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Falsify.swift; sourceTree = "<group>"; };
 		46904EF92AFE1F57008A6F0B /* TaskRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRule.swift; sourceTree = "<group>"; };
 		46C48E5D2A8882FC001091A4 /* ProtocolDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDetector.swift; sourceTree = "<group>"; };
 		46C48E5F2A888365001091A4 /* Matcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
 		46D32EE62A9B47BA00F8C434 /* swift-nio-ssl */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-nio-ssl"; path = "../../swift-nio-ssl"; sourceTree = "<group>"; };
 		46D32EE72A9B47F100F8C434 /* swift-nio-ssl */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-nio-ssl"; path = "../../swift-nio-ssl"; sourceTree = "<group>"; };
-		46E9D1D72B01FF630075D3B0 /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		46F50B6F2B23078F0079FC94 /* LocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalService.swift; sourceTree = "<group>"; };
+		46F50B742B2311020079FC94 /* HTTPServerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPServerHandler.swift; sourceTree = "<group>"; };
+		46F50B762B23119D0079FC94 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		46F50B7B2B231EF90079FC94 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		46F61DDD2AD2520200D97070 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		46F61DDF2AD2533F00D97070 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		46F61DE12AD2800800D97070 /* Data+Gzip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Gzip.swift"; sourceTree = "<group>"; };
@@ -119,6 +125,7 @@
 				462A000B2A910EC70054B80B /* NIOCore in Frameworks */,
 				46E9D1DB2B0201F20075D3B0 /* SwiftyJSON in Frameworks */,
 				E1904CB3616A9B189A9E669B /* Pods_Runner.framework in Frameworks */,
+				46F50B732B230E990079FC94 /* Reachability in Frameworks */,
 				46D32EEA2A9B481000F8C434 /* NIOSSL in Frameworks */,
 				462A00122A91119D0054B80B /* NIOTransportServices in Frameworks */,
 				462A00092A910EC70054B80B /* NIO in Frameworks */,
@@ -148,6 +155,8 @@
 				468F0ECF2A8BD5990081D473 /* Extension */,
 				46C48E5C2A8882D2001091A4 /* Detector */,
 				468196162A8798D500C88A04 /* ProxyService.swift */,
+				46F50B6F2B23078F0079FC94 /* LocalService.swift */,
+				465CD12F2B2C23A4007D9BE0 /* CheckCert.swift */,
 			);
 			path = ProxyService;
 			sourceTree = "<group>";
@@ -159,7 +168,7 @@
 				46F61DE12AD2800800D97070 /* Data+Gzip.swift */,
 				46F61DE32AD2800800D97070 /* Dictionary+Json.swift */,
 				468F0ED02A8BD5D60081D473 /* String+Extension.swift */,
-				46E9D1D72B01FF630075D3B0 /* NSObject+Extension.swift */,
+				46F50B762B23119D0079FC94 /* Date+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -173,6 +182,7 @@
 				4637923E2A9219BB002BC7E8 /* HTTPSHandler.swift */,
 				463792402A921A92002BC7E8 /* TunnelProxyHandler.swift */,
 				463792422A921B37002BC7E8 /* SSLHandler.swift */,
+				46F50B742B2311020079FC94 /* HTTPServerHandler.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -195,8 +205,6 @@
 				46904EF92AFE1F57008A6F0B /* TaskRule.swift */,
 				46F61DDD2AD2520200D97070 /* Task.swift */,
 				46F61DDF2AD2533F00D97070 /* Session.swift */,
-				46904EF52AFCF983008A6F0B /* Filter.swift */,
-				46904EF72AFDC529008A6F0B /* Falsify.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -255,6 +263,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				46046E452B1DD1BB00F46077 /* Runner.entitlements */,
 				468196152A8798B400C88A04 /* ProxyService */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
@@ -264,6 +273,7 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				46F50B7B2B231EF90079FC94 /* index.html */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -305,6 +315,7 @@
 				462A00112A91119D0054B80B /* NIOTransportServices */,
 				46D32EE92A9B481000F8C434 /* NIOSSL */,
 				46E9D1DA2B0201F20075D3B0 /* SwiftyJSON */,
+				46F50B722B230E990079FC94 /* Reachability */,
 			);
 			productName = Runner;
 			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
@@ -339,6 +350,7 @@
 				462A00102A91119D0054B80B /* XCRemoteSwiftPackageReference "swift-nio-transport-services" */,
 				46D32EE82A9B481000F8C434 /* XCRemoteSwiftPackageReference "swift-nio-ssl" */,
 				46E9D1D92B0201F20075D3B0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				46F50B712B230E990079FC94 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
@@ -354,6 +366,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46F50B7C2B231EF90079FC94 /* index.html in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
@@ -442,20 +455,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				46F61DE42AD2800800D97070 /* Data+Gzip.swift in Sources */,
-				46904EF62AFCF983008A6F0B /* Filter.swift in Sources */,
 				46F61DE02AD2533F00D97070 /* Session.swift in Sources */,
 				468F0EDB2A8BD7950081D473 /* ProxyContext.swift in Sources */,
 				463792472A92421B002BC7E8 /* CertUtils.swift in Sources */,
 				46904EFA2AFE1F57008A6F0B /* TaskRule.swift in Sources */,
 				4637923D2A92193B002BC7E8 /* HTTPSMatcher.swift in Sources */,
 				468F0ED12A8BD5D60081D473 /* String+Extension.swift in Sources */,
+				46F50B752B2311020079FC94 /* HTTPServerHandler.swift in Sources */,
 				468F0ED42A8BD69B0081D473 /* HTTPHandler.swift in Sources */,
 				468F0EDD2A8BD80B0081D473 /* ProxyRequest.swift in Sources */,
 				46F61DE52AD2800800D97070 /* Data+Compression.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
-				46904EF82AFDC529008A6F0B /* Falsify.swift in Sources */,
 				468F0ED62A8BD7140081D473 /* ExchangeHandler.swift in Sources */,
+				46F50B702B23078F0079FC94 /* LocalService.swift in Sources */,
 				46F61DE62AD2800800D97070 /* Dictionary+Json.swift in Sources */,
 				468F0ED82A8BD73D0081D473 /* ChannelWatchHandler.swift in Sources */,
 				468F0EDF2A8BD8A10081D473 /* NetworkInfo.swift in Sources */,
@@ -466,9 +479,10 @@
 				468F0EE12A8BD94E0081D473 /* HTTPMatcher.swift in Sources */,
 				4637923F2A9219BB002BC7E8 /* HTTPSHandler.swift in Sources */,
 				463792432A921B37002BC7E8 /* SSLHandler.swift in Sources */,
+				465CD1302B2C23A4007D9BE0 /* CheckCert.swift in Sources */,
+				46F50B772B23119D0079FC94 /* Date+Extension.swift in Sources */,
 				468196172A8798D500C88A04 /* ProxyService.swift in Sources */,
 				463792412A921A92002BC7E8 /* TunnelProxyHandler.swift in Sources */,
-				46E9D1D82B01FF630075D3B0 /* NSObject+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +564,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -678,7 +694,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -700,7 +718,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -773,6 +793,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		46F50B712B230E990079FC94 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -810,6 +838,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 46E9D1D92B0201F20075D3B0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		46F50B722B230E990079FC94 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46F50B712B230E990079FC94 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

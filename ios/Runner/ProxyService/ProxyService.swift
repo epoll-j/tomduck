@@ -152,4 +152,26 @@ public class ProxyService: NSObject {
        
         return storeFolder
    }
+    
+    public static func getCertPath() -> URL? {
+        let fileManager = FileManager.default
+        var certDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        certDirectory.appendPathComponent("Cert")
+        let dir = certDirectory.absoluteString.components(separatedBy: "file://").last
+        let isExits = fileManager.fileExists(atPath: dir!, isDirectory:nil)
+        if !isExits {
+            try? fileManager.createDirectory(at: certDirectory, withIntermediateDirectories: false, attributes: nil)
+        }
+        return certDirectory
+    }
+    
+    private static func saveCert() {
+        let fileManager = FileManager.default
+        if let certDir = self.getCertPath() {
+            let certPath = certDir.appendingPathComponent("cert.pem", isDirectory: false)
+            if !fileManager.fileExists(atPath: certPath.absoluteString) {
+                try? String(data: Data(cert), encoding: .utf8)?.write(to: certPath, atomically: true, encoding: .utf8)
+            }
+        }
+    }
 }

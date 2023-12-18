@@ -5,11 +5,12 @@ import Flutter
 @objc class AppDelegate: FlutterAppDelegate {
     
     private var proxyService: ProxyService?
+    private var localService = LocalService()
     private var methodChannel: FlutterMethodChannel?
     private var eventChannel: FlutterEventChannel?
     private var saveEventSink: FlutterEventSink?
     
-    override func application(
+    override func application (
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
@@ -17,7 +18,9 @@ import Flutter
         
         let messenger: FlutterBinaryMessenger = window?.rootViewController as! FlutterBinaryMessenger
         notificationCenterObserver()
+        createHtdocs()
         flutterMessengerHandler(messenger: messenger)
+        
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -48,7 +51,6 @@ import Flutter
                             self.proxyService = ProxyService.create(arg)
                         }
                     }
-                    
                     self.proxyService?.run({ _ in
                         result(["code": 1, "data": ["wifi": NetworkInfo.LocalWifiIPv4(), ]] as [String : Any])
                     })
@@ -57,12 +59,40 @@ import Flutter
                         self.proxyService = nil
                         result(["code": 1])
                     })
+                case "start_local_http_service":
+                    self.localService.run()
+                case "stop_local_http_service":
+                    self.localService.close()
                 case "get_proxy_state":
                     result(["code": 1, "data": self.proxyService?.wifiState ?? .closed] as [String : Any])
                 default: break
                     
                 }
             }
+        }
+    }
+    
+    func createHtdocs() {
+        let fileManager = FileManager.default
+        let httpRootDir = LocalService.httpRootPath
+        do {
+            if !fileManager.fileExists(atPath: httpRootDir.path) {
+                try fileManager.createDirectory(at: httpRootDir, withIntermediateDirectories: false)
+            }
+            let indexPath = httpRootDir.appendingPathComponent("index.html")
+            if fileManager.fileExists(atPath: indexPath.path) {
+                try fileManager.removeItem(atPath: indexPath.path)
+            }
+            if let bundlePath = Bundle.main.url(forResource: "index", withExtension: "html") {
+                try fileManager.copyItem(at: bundlePath, to: indexPath)
+            }
+            let caPath = httpRootDir.appendingPathComponent("ca.pem", isDirectory: false)
+            if fileManager.fileExists(atPath: caPath.path) {
+                try fileManager.removeItem(atPath: caPath.path)
+            }
+            try? String(data: Data(cert), encoding: .utf8)?.write(to: caPath, atomically: true, encoding: .utf8)
+        } catch {
+            print("http root create failure: \(error.localizedDescription)")
         }
     }
     

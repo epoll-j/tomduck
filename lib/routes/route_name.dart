@@ -27,4 +27,6 @@ class RouteName {
   static String historyItem = '/historyItem';
 
   static String sessionDetail = '/sessionDetail';
+
+  static String cert = '/cert';
 }
