@@ -2,7 +2,7 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
-import 'package:tomduck/components/layouts/basic_scaffold.dart';
+import 'package:iflow/components/layouts/basic_scaffold.dart';
 
 import '../../../config/app_config.dart';
 import '../../../database/falsify_model.dart';

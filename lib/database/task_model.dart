@@ -1,5 +1,5 @@
 import 'package:sqflite_common/sqlite_api.dart';
-import 'package:tomduck/database/base_model.dart';
+import 'package:iflow/database/base_model.dart';
 
 class TaskModel extends BaseModel {
   TaskModel._internal();

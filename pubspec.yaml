@@ -1,4 +1,4 @@
-name: tomduck
+name: iflow
 description: A http debugge tool.
 
 # The following defines the version and build number for your application.
@@ -35,7 +35,7 @@ dependencies:
   url_launcher: ^6.2.2
   permission_handler: 10.4.3 # 权限
   fluttertoast: 8.2.2
-  bruno: 3.4.0
+  bruno: ^3.4.3
   sqflite: ^2.3.0
   intl: any
   json_theme: ^6.3.0

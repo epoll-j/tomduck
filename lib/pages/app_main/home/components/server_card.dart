@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:bruno/bruno.dart';
 import 'package:provider/provider.dart';
-import 'package:tomduck/database/task_model.dart';
-import 'package:tomduck/provider/proxy.p.dart';
-import 'package:tomduck/utils/channel_tools.dart';
+import 'package:iflow/database/task_model.dart';
+import 'package:iflow/provider/proxy.p.dart';
+import 'package:iflow/utils/channel_tools.dart';
 import 'home_item_card.dart';
 
 class ServerCard extends StatefulWidget {

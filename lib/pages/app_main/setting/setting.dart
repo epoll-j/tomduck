@@ -1,6 +1,6 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
-import 'package:tomduck/components/layouts/basic_scaffold.dart';
+import 'package:iflow/components/layouts/basic_scaffold.dart';
 
 import '../../../config/app_config.dart';
 import '../../../iconfont/icon_font.dart';

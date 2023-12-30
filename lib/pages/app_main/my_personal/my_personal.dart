@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'components/set_theme_demo.dart';
-import 'package:jh_debug/jh_debug.dart';
 
 import 'components/head_userbox.dart';
 
@@ -32,7 +31,7 @@ class _MyPersonalState extends State<MyPersonal>
       floatingActionButton: FloatingActionButton(
         heroTag: 'myPerBtn1',
         onPressed: () {
-          jhDebug.showDebugBtn(); // 全局显示调试按钮
+
         },
         tooltip: '显示全局浮动调试按钮',
         child: const Icon(Icons.bug_report),

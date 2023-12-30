@@ -2,7 +2,7 @@ import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:intl/intl.dart';
-import 'package:tomduck/database/task_model.dart';
+import 'package:iflow/database/task_model.dart';
 import '../../../components/layouts/basic_scaffold.dart';
 import '../../../config/app_config.dart';
 

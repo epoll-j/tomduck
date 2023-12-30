@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bruno/bruno.dart';
 import 'package:provider/provider.dart';
-import 'package:tomduck/config/app_config.dart';
+import 'package:iflow/config/app_config.dart';
 import '../../../../provider/proxy.p.dart';
 import 'home_item_card.dart';
 

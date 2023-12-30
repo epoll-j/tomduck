@@ -1,8 +1,8 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tomduck/config/app_config.dart';
-import 'package:tomduck/database/database.dart';
+import 'package:iflow/config/app_config.dart';
+import 'package:iflow/database/database.dart';
 
 class Filter extends StatefulWidget {
   @override

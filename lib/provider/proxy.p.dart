@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tomduck/database/session_model.dart';
+import 'package:iflow/database/session_model.dart';
 
 import '../database/task_model.dart';
 

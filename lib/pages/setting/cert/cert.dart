@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tomduck/components/layouts/basic_card.dart';
-import 'package:tomduck/components/layouts/basic_scaffold.dart';
-import 'package:tomduck/utils/channel_tools.dart';
+import 'package:iflow/components/layouts/basic_card.dart';
+import 'package:iflow/components/layouts/basic_scaffold.dart';
+import 'package:iflow/utils/channel_tools.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../config/app_config.dart';

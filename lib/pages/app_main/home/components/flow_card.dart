@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bruno/bruno.dart';
 import 'package:provider/provider.dart';
-import 'package:tomduck/provider/proxy.p.dart';
+import 'package:iflow/provider/proxy.p.dart';
 import 'home_item_card.dart';
 
 class FlowCard extends StatefulWidget {

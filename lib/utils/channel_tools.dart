@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'dart:async';
 
-import 'package:tomduck/database/session_model.dart';
+import 'package:iflow/database/session_model.dart';
 
 class ChannelTools {
   final _methodChannel = const MethodChannel("iflow.epoll.dev/method_channel");

@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:tomduck/pages/app_main/setting/setting.dart';
+import 'package:iflow/pages/app_main/setting/setting.dart';
 import '../../routes/route_name.dart';
 import '../../components/update_app/check_app_version.dart'
     show checkAppVersion;
-import '../../config/app_env.dart' show appEnv, ENV;
+
 import '../../config/app_config.dart';
 import '../../components/exit_app_interceptor/exit_app_interceptor.dart';
 import '../../provider/global.p.dart';
-import 'my_personal/my_personal.dart';
-import 'search/search.dart';
-import 'hot/hot.dart';
+
 import 'home/home.dart';
-import 'package:tomduck/pages/app_main/history/history.dart';
+import 'package:iflow/pages/app_main/history/history.dart';
 
 /// [params] 别名路由传递的参数
 /// [params.pageId] 跳转到指定tab页面（0第一页），如果不是别名路由跳转的话，又想实现跳转到指定tab页面，推荐别名路由跳转方式。

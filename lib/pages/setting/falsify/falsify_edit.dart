@@ -1,8 +1,8 @@
 import 'package:bruno/bruno.dart';
 import 'package:flutter/material.dart';
-import 'package:tomduck/components/layouts/basic_scaffold.dart';
-import 'package:tomduck/config/app_config.dart';
-import 'package:tomduck/database/falsify_model.dart';
+import 'package:iflow/components/layouts/basic_scaffold.dart';
+import 'package:iflow/config/app_config.dart';
+import 'package:iflow/database/falsify_model.dart';
 
 class FalsifyEdit extends StatefulWidget {
   FalsifyEdit({super.key, this.params}) {
